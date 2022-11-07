@@ -1,0 +1,74 @@
+package de.buw.se4de;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
+public class FileOrganizer {
+    public void create_file(){
+        try {
+            //File myObj = new File("tamagotchi.txt");
+            File myObj = new File("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
+
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (
+                IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void read_file(){
+        try {
+            File myObj = new File("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void write_file(Pet pet){
+        try {
+            //FileWriter myWriter = new FileWriter("tamagotchi.txt");
+            FileWriter myWriter = new FileWriter("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
+            myWriter.write(pet.name_ + "\n");
+            myWriter.write(pet.sex_ + "\n");
+            myWriter.write(pet.hunger_ + "\n");
+            myWriter.write(pet.hygiene_ + "\n");
+            myWriter.write(pet.attention_ + "\n");
+            myWriter.write(pet.getFavoriteFood() + "\n");
+            myWriter.write(pet.getFavoriteToy() + "\n");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public String[] load_file() throws IOException {
+        FileReader fileReader = new FileReader("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        List<String> lines = new ArrayList<String>();
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null) {
+            lines.add(line);
+        }
+        bufferedReader.close();
+        return lines.toArray(new String[lines.size()]);
+    }
+}
