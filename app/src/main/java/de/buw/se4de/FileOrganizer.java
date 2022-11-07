@@ -41,17 +41,17 @@ public class FileOrganizer {
         }
     }
 
-    public void write_file(Dog dog){
+    public void write_file(Pet pet){
         try {
             //FileWriter myWriter = new FileWriter("tamagotchi.txt");
             FileWriter myWriter = new FileWriter("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
-            myWriter.write(dog.get_name() + "\n");
-            myWriter.write(dog.get_sex() + "\n");
-            myWriter.write(dog.get_hunger() + "\n");
-            myWriter.write(dog.get_hygiene() + "\n");
-            myWriter.write(dog.get_attention() + "\n");
-            myWriter.write(dog.get_fav_food() + "\n");
-            myWriter.write(dog.get_fav_toy() + "\n");
+            myWriter.write(pet.name_ + "\n");
+            myWriter.write(pet.sex_ + "\n");
+            myWriter.write(pet.hunger_ + "\n");
+            myWriter.write(pet.hygiene_ + "\n");
+            myWriter.write(pet.attention_ + "\n");
+            myWriter.write(pet.get_fav_food() + "\n");
+            myWriter.write(pet.get_fav_toy() + "\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
