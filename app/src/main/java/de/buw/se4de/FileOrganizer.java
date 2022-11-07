@@ -12,7 +12,7 @@ public class FileOrganizer {
     public void create_file(){
         try {
             //File myObj = new File("tamagotchi.txt");
-            File myObj = new File("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+            File myObj = new File("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
 
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
@@ -28,7 +28,7 @@ public class FileOrganizer {
 
     public void read_file(){
         try {
-            File myObj = new File("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+            File myObj = new File("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -44,14 +44,14 @@ public class FileOrganizer {
     public void write_file(Pet pet){
         try {
             //FileWriter myWriter = new FileWriter("tamagotchi.txt");
-            FileWriter myWriter = new FileWriter("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+            FileWriter myWriter = new FileWriter("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
             myWriter.write(pet.name_ + "\n");
             myWriter.write(pet.sex_ + "\n");
             myWriter.write(pet.hunger_ + "\n");
             myWriter.write(pet.hygiene_ + "\n");
             myWriter.write(pet.attention_ + "\n");
-            myWriter.write(pet.get_fav_food() + "\n");
-            myWriter.write(pet.get_fav_toy() + "\n");
+            myWriter.write(pet.getFavoriteFood() + "\n");
+            myWriter.write(pet.getFavoriteToy() + "\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class FileOrganizer {
     }
 
     public String[] load_file() throws IOException {
-        FileReader fileReader = new FileReader("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+        FileReader fileReader = new FileReader("C:\\Users\\danie\\OneDrive\\Desktop\\tamagotchi.txt");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> lines = new ArrayList<String>();
         String line = null;

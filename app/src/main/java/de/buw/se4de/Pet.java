@@ -1,22 +1,20 @@
 package de.buw.se4de;
-import java.lang.Math;
-import java.util.Random;
 
-
+import java.util.Date;
 public abstract class Pet {
     protected String name_, sex_;
     protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
-    //private int health_ = hunger + hygiene + attention;
+    protected int health = hunger_ + hygiene_ + attention_;
+
+    protected Date birthday_;
     public Pet(){
         this.name_ = "None";
         this.sex_ = "None";
-        this.hunger_ = 10;
-        this.hygiene_ = 10;
-        this.attention_ = 10;
     }
     public Pet(String name, String sex){
         this.name_ = name;
         this.sex_ = sex;
+        this.birthday_ = new Date();
     }
 
     public Pet(String name, String sex, int hunger, int hygiene, int attention){
@@ -27,12 +25,14 @@ public abstract class Pet {
         this.attention_ = attention;
     }
 
-    public abstract String random_fav_food();
-    public abstract String random_fav_toy();
+    abstract String randomFavFood();
+    abstract String randomFavToy();
 
-    public abstract String get_fav_food();
+    abstract String getFavoriteFood();
 
-    public abstract String get_fav_toy();
+    abstract String getFavoriteToy();
+
+    //Todo getter ändern mit Großbuchstaben
     public String get_name(){ return name_; }
 
     public String get_sex(){
@@ -51,52 +51,59 @@ public abstract class Pet {
         return attention_;
     }
 
-    public void feed(Pet dog ){
-        if(dog.hunger_ < 7){
-            System.out.println("Before feeding: " + dog.hunger_);
-            dog.hunger_ += 3;
-            System.out.println("After feeding: " + dog.hunger_);
+    Date getBirthDay(){ return birthday_; }
+
+    public void feed(){
+        if(hunger_ < 7){
+            System.out.println("Before feeding: " + hunger_);
+            hunger_ += 3;
+            System.out.println("After feeding: " + hunger_);
         }
-        else if (dog.hunger_ <= 9 && dog.hunger_ >= 7){
-            System.out.println("Before feeding: " + dog.hunger_);
-            dog.hunger_ = 10;
-            System.out.println("After feeding: " + dog.hunger_);
+        else if (hunger_ <= 9 && hunger_ >= 7){
+            System.out.println("Before feeding: " + hunger_);
+            hunger_ = 10;
+            System.out.println("After feeding: " + hunger_);
         }
-        else if (dog.hunger_ == 10){
-            System.out.println(dog.name_ +" is not hungry");
+        else if (hunger_ == 10){
+            System.out.println(name_ +" is not hungry");
         }
     }
 
-    public void clean(Pet dog){
-        if(dog.hygiene_ < 7){
-            System.out.println("Before cleaning: " + dog.hygiene_);
-            dog.hygiene_ += 3;
-            System.out.println("After cleaning: " + dog.hygiene_);
+    public void clean(){
+        if(hygiene_ < 7){
+            System.out.println("Before cleaning: " + hygiene_);
+            hygiene_ += 3;
+            System.out.println("After cleaning: " + hygiene_);
         }
-        else if (dog.hygiene_ <= 9 && dog.hygiene_ >= 7){
-            System.out.println("Before cleaning: " + dog.hygiene_);
-            dog.hygiene_ = 10;
-            System.out.println("After cleaning: " + dog.hygiene_);
+        else if (hygiene_ <= 9 && hygiene_ >= 7){
+            System.out.println("Before cleaning: " + hygiene_);
+            hygiene_ = 10;
+            System.out.println("After cleaning: " + hygiene_);
         }
-        else if (dog.hygiene_ == 10){
-            System.out.println(dog.name_ +" is clean enough");
+        else if (hygiene_ == 10){
+            System.out.println(name_ +" is clean enough");
         }
     }
 
-    public void play(Pet dog){
-        if(dog.attention_ < 7){
-            System.out.println("Before playing: " + dog.attention_);
-            dog.attention_ += 3;
-            System.out.println("After playing: " + dog.attention_);
+    public void play(){
+        if(attention_ < 7){
+            System.out.println("Before playing: " + attention_);
+            attention_ += 3;
+            System.out.println("After playing: " + attention_);
         }
-        else if (dog.attention_ <= 9 && dog.attention_ >= 7){
-            System.out.println("Before playing: " + dog.attention_);
-            dog.attention_ = 10;
-            System.out.println("After playing: " + dog.attention_);
+        else if (attention_ <= 9 && attention_ >= 7){
+            System.out.println("Before playing: " + attention_);
+            attention_ = 10;
+            System.out.println("After playing: " + attention_);
         }
-        else if (dog.attention_ == 10){
-            System.out.println(dog.name_ +" Don't wants to play with you anymore.");
+        else if (attention_ == 10){
+            System.out.println(name_ +" Don't wants to play with you anymore.");
         }
+    }
+
+    void getInformation(){
+        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + birthday_);
+        System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health);
     }
 
 }
