@@ -39,30 +39,4 @@ class Dog extends Pet {
         this.favorite_food_ = fav_food;
         this.favorite_toy_ =fav_toy;
     }
-    public void feed(Dog dog){
-        if(dog.hunger_ < 7){
-            dog.hunger_ += 3;
-        }
-        else{
-            dog.hunger_ = 10;
-        }
-    }
-
-    public void clean(Dog dog){
-        if(dog.hygiene_ <7){
-            dog.hygiene_ += 3;
-        }
-        else{
-            dog.hygiene_ = 10;
-        }
-    }
-
-    public void play(Dog dog){
-        if(dog.attention_ <7){
-            dog.attention_ += 3;
-        }
-        else{
-            dog.attention_ = 10;
-        }
-    }
 }

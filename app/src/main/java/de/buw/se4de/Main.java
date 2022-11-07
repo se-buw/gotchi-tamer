@@ -10,23 +10,23 @@ public class Main {
         String command = scanner.nextLine();
         while (!close) {
             System.out.println("What would you like to do next?");
-            String next = scanner.nextLine();
-            if (next.equals("save")) {
+            command = scanner.nextLine();
+            if (command.toUpperCase().equals("SAVE")) {
                 file.write_file(dog);
             }
-            if (next.equals("read")) {
+            if (command.toUpperCase().equals("READ")) {
                 file.read_file();
             }
-            if (next.equals("close")) {
+            if (command.toUpperCase().equals("CLOSE")) {
                 close = true;
             }
-            if (next.equals("feed")) {
+            if (command.toUpperCase().equals("FEED")) {
                 dog.feed(dog);
             }
-            if (next.equals("clean")) {
+            if (command.toUpperCase().equals("CLEAN")) {
                 dog.clean(dog);
             }
-            if (next.equals("play")) {
+            if (command.toUpperCase().equals("PLAY")) {
                 dog.play(dog);
             }
         }
@@ -37,14 +37,14 @@ public class Main {
         System.out.println("If you want to create a new tamagotchi type: create");
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
-        if (command.equals("create")) {
+        if (command.toUpperCase().equals("CREATE")) {
             System.out.println("For now you can create a dog");
             System.out.println("What is the name of your dog?");
             String name = scanner.nextLine();
             System.out.println("Which gender should your dog have?");
             System.out.println("You can choose between Male and Female.");
             String sex = scanner.nextLine();
-            while (!sex.equals("Male") && !sex.equals("Female")) {
+            while (!sex.toUpperCase().equals("MALE") && !sex.toUpperCase().equals("FEMALE")) {
                 System.out.println("Please write Male or Female.");
                 sex = scanner.nextLine();
             }
@@ -59,30 +59,14 @@ public class Main {
             file.create_file();
             game(myDog, file);
         }
-        if (command.equals("load")) {
+        if (command.toUpperCase().equals("LOAD")) {
             FileOrganizer file = new FileOrganizer();
             String attributes[] = file.load_file();
             Dog myDog = new Dog(attributes[0], attributes[1], Integer.parseInt(attributes[2]), Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]), attributes[5], attributes[6]);
+            if((myDog.hunger_ + myDog.attention_ + myDog.hygiene_ ) == 0){
+                System.out.println(myDog.name_ + "died!");
+            }
             game(myDog, file);
         }
     }
 }
-        /*
-        while(!close){
-            FileOrganizer file = new FileOrganizer();
-            System.out.println("What would you like to do next?");
-            String next = scanner.nextLine();
-            if(next.equals("save")){
-                file.write_file(myDog);
-            }
-            if(next.equals("read")){
-                file.read_file();
-            }
-            if(next.equals("close")){
-                close = true;
-            }
-        }
-    }
-}
-
-*/
