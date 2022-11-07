@@ -61,28 +61,20 @@ public class Main {
         Pet dog = new Dog("coco", "male");
         dog.getInformation();
 
-        LocalDateTime ldt1 = LocalDateTime.now();
-        LocalDateTime ldt2 = ldt1.plusDays(3);
-
-        long ldt3 =Duration.between(ldt1, ldt2).toMinutes();
-
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd HH:mm:ss");
-        //String ldt4 = ldt3.toString();
-
-        System.out.println(ldt1);
-        System.out.println(ldt2);
-        System.out.println(ldt3);
-        //System.out.println(ldt4);
-
-        /*
-        Scanner input = new Scanner(System.in);
+        Scanner sr = new Scanner(System.in);
+        String input = sr.nextLine();
         boolean close = false;
-        while (!close){
+        do {
 
+            switch (input) {
+                case "feed":
 
+            }
+        }while (!close);
+    }
+    // Todo
+    public static void displayChoices(){
 
-            close = true;
-        }*/
     }
 
 }
