@@ -52,7 +52,7 @@ public abstract class Pet {
     }
 
     Date getBirthDay(){ return birthday_; }
-
+// Todo: berechnungen der variablen in den methoden anpassen
     public void feed(){
         if(hunger_ < 7){
             System.out.println("Before feeding: " + hunger_);
@@ -102,8 +102,10 @@ public abstract class Pet {
     }
 
     void getInformation(){
+        System.out.println("*********************************************");
         System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + birthday_);
         System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health);
+        System.out.println("*********************************************");
     }
 
 }

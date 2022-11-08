@@ -9,9 +9,9 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 public class FileOrganizer {
-    public void create_file(){
+    public void create_file(Pet pet){
         try {
-            File myObj = new File("tamagotchi.txt");
+            File myObj = new File(pet.get_name()+".txt");
             //File myObj = new File("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
 
             if (myObj.createNewFile()) {
@@ -44,7 +44,7 @@ public class FileOrganizer {
 
     public void write_file(Pet pet){
         try {
-            FileWriter myWriter = new FileWriter("tamagotchi.txt");
+            FileWriter myWriter = new FileWriter(pet.get_name()+".txt");
             //FileWriter myWriter = new FileWriter("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
             myWriter.write(pet.name_ + "\n");
             myWriter.write(pet.sex_ + "\n");
@@ -56,20 +56,30 @@ public class FileOrganizer {
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("!!!!An error occurred.");
             e.printStackTrace();
         }
     }
+// Todo: problem-> was ist wenn die datei nicht vorhanden ist?
+    public String[] load_file(String name) throws IOException {
+        try {
+            FileReader fileReader = new FileReader(name+".txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            List<String> lines = new ArrayList<String>();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                lines.add(line);
+            }
+            bufferedReader.close();
+            return lines.toArray(new String[lines.size()]);
+        } catch (IOException e) {
+            System.out.println("could not load a game!");
+            System.out.println("You did not play this game before. Please start a new game!");
+            e.printStackTrace();
 
-    public String[] load_file() throws IOException {
-        FileReader fileReader = new FileReader("tamagotchi.txt");
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        List<String> lines = new ArrayList<String>();
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null) {
-            lines.add(line);
         }
-        bufferedReader.close();
-        return lines.toArray(new String[lines.size()]);
+        String[] a = {} ;
+        return a;
     }
+
 }

@@ -14,7 +14,7 @@ class Dog extends Pet {
     }
     @Override
     public String randomFavFood(){
-        String[] food = {"Chicken", "Pork", "Beef"};
+        String[] food = {"Apple", "Bread", "Steak"};
         Random random_number = new Random();
         String fav_food = food[Math.abs(random_number.nextInt()) % food.length];
         return fav_food;
