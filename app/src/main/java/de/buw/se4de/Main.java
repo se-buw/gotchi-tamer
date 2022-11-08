@@ -41,22 +41,22 @@ public class Main {
     public static void startGame(Pet pet){
         // Todo: code that read the file pet and make it here
         Scanner sr = new Scanner(System.in);
-        String input = sr.nextLine();
         FileOrganizer file = new FileOrganizer();
         boolean close = false;
         do {
+            String input = sr.nextLine().toLowerCase();
             displayStats();
             displayChoices();
-
             switch (input) {
-                case "feed": pet.feed();
-                case "clean": pet.clean();
-                case "play": pet.play();
-                case "save": file.write_file(pet);
-                case "close": close = true;
+                case "feed": pet.feed(); break;
+                case "clean": pet.clean(); break;
+                case "play": pet.play(); break;
+                case "save": file.write_file(pet); break;
+                case "close": close = true; break;
+                default:
+                    System.out.println("That is not a valid command!");
             }
-
-        }while (!close);
+        }while(!close);
     }
 
     public static Pet loadGame() throws IOException{
