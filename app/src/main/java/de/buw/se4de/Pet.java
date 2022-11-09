@@ -1,35 +1,37 @@
 package de.buw.se4de;
-
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public abstract class Pet {
     protected String name_, sex_;
     protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
     protected int health = hunger_ + hygiene_ + attention_;
-
-    protected LocalDateTime birthday_;
+    protected LocalDateTime birthday_, lastLogout_, timeNow_;
     protected Time age_;
 
     public Pet(){
         name_ = "None";
         sex_ = "None";
     }
+    private LocalDateTime stringToLocalDateTime(String str){
+        LocalDateTime dateTime = LocalDateTime.parse(str);
+        return dateTime;
+    }
+
     public Pet(String name, String sex){
         name_ = name;
         sex_ = sex;
         birthday_ = LocalDateTime.now();
     }
-    private LocalDateTime stringToLocalDateTime(String str){
-        LocalDateTime dateTime = LocalDateTime.parse(str);
-        return dateTime;
-    }
-    public Pet(String name, String sex, int hunger, int hygiene, int attention, String birthday){
+
+    public Pet(String name, String sex, int hunger, int hygiene, int attention, String birthday, String lastLogout){
         name_ = name;
         sex_ = sex;
         hunger_ = hunger;
         hygiene_ = hygiene;
         attention_ = attention;
         birthday_ = stringToLocalDateTime(birthday);
+        lastLogout_ = stringToLocalDateTime(lastLogout);
     }
 
     abstract String randomFavFood();
@@ -61,8 +63,8 @@ public abstract class Pet {
     LocalDateTime getBirthDay(){ return birthday_; }
     Time getAge(){return age_;}
 
-    void setAge(Time newAge){
-        age_ = newAge;
+    void setAge(){
+        age_ = new Time(Duration.between(birthday_, LocalDateTime.now()).toDays(), Duration.between(birthday_, LocalDateTime.now()).toHours(), Duration.between(birthday_, LocalDateTime.now()).toMinutes());;
     }
 
 // Todo: berechnungen der variablen in den methoden anpassen
@@ -110,13 +112,14 @@ public abstract class Pet {
             System.out.println("After playing: " + attention_);
         }
         else if (attention_ == 10){
-            System.out.println(name_ +" Don't wants to play with you anymore.");
+            System.out.println(name_ +" doesn't want to play with you anymore.");
         }
     }
 
     void getInformation(){
         System.out.println("*********************************************");
-        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minuets_ + "M" );
+        setAge();
+        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" );
         System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health);
         System.out.println("*********************************************");
     }

@@ -1,5 +1,6 @@
 package de.buw.se4de;
 import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -33,9 +34,7 @@ public class Main {
         }
         //Todo andere Tiere und Filename
         if (selectedPet.equals("dog")){
-            System.out.println("1");
             Pet pet = new Dog(name, sex);
-            System.out.println("2");
             FileOrganizer file = new FileOrganizer();
             file.create_file(pet);
             file.write_file(pet);
@@ -43,21 +42,14 @@ public class Main {
         return name;
     }
     public static void startGame(Pet pet){
+        long pastTime = Duration.between(pet.getBirthDay(), LocalDateTime.now()).toMinutes();
+        System.out.println("Time that has been past, since the last logout:" + pastTime);
         pet.getInformation();
         displayChoices();
         Scanner sr = new Scanner(System.in);
         FileOrganizer file = new FileOrganizer();
         boolean close = false;
         do {
-            // Age berechnen
-
-            LocalDateTime timeNow = LocalDateTime.now();
-            long updatedAgeDays = Duration.between(pet.getBirthDay(), timeNow).toDays();
-            long updatedAgeHours = Duration.between(pet.getBirthDay(), timeNow).toHours();
-            long updatedAgeMinutes = Duration.between(pet.getBirthDay(), timeNow).toMinutes();
-            Time updatedAge = new Time(updatedAgeDays, updatedAgeHours, updatedAgeMinutes);
-            pet.setAge(updatedAge);
-
             String input = sr.nextLine().toLowerCase();
             boolean back = false;
             switch (input) {
@@ -198,7 +190,7 @@ public class Main {
         }
         Pet pet = new Dog(attributes[0], attributes[1], Integer.parseInt(attributes[2]),
                 Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]),
-                attributes[5], attributes[6], attributes[7]);
+                attributes[5], attributes[6], attributes[7], attributes[8]);
         if((pet.hunger_ + pet.attention_ + pet.hygiene_ ) == 0){
             System.out.println(pet.name_ + " died!");
         }

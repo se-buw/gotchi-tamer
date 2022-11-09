@@ -1,9 +1,11 @@
 package de.buw.se4de;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.lang.Math;
 
 class Dog extends Pet {
     protected String favorite_food_, favorite_toy_;
+
     @Override
     public String getFavoriteFood(){
         return favorite_food_;
@@ -35,8 +37,8 @@ class Dog extends Pet {
         favorite_toy_ = randomFavToy();
     }
 
-    public Dog(String name, String sex, int hunger, int hygiene, int attention, String fav_food, String fav_toy, String birthday){
-        super(name, sex, hunger, hygiene, attention, birthday);
+    public Dog(String name, String sex, int hunger, int hygiene, int attention, String fav_food, String fav_toy, String birthday, String lastLogout){
+        super(name, sex, hunger, hygiene, attention, birthday, lastLogout);
         this.favorite_food_ = fav_food;
         this.favorite_toy_ = fav_toy;
     }

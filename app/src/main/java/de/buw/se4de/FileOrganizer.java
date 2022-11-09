@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.*;
 import java.util.List;
@@ -54,6 +55,7 @@ public class FileOrganizer {
             myWriter.write(pet.getFavoriteFood() + "\n");
             myWriter.write(pet.getFavoriteToy() + "\n");
             myWriter.write(pet.getBirthDay() + "\n");
+            myWriter.write(LocalDateTime.now() + "\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
