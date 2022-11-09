@@ -56,7 +56,7 @@ public class FileOrganizer {
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("!!!!An error occurred.");
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
@@ -75,7 +75,7 @@ public class FileOrganizer {
         } catch (IOException e) {
             System.out.println("could not load a game!");
             System.out.println("You did not play this game before. Please start a new game!");
-            e.printStackTrace();
+            // e.printStackTrace();
 
         }
         String[] a = {} ;

@@ -26,7 +26,9 @@ class Dog extends Pet {
         String fav_toy = toy[Math.abs(random_number.nextInt()) % toy.length];
         return fav_toy;
     }
-
+    Dog(){
+        super();
+    }
     public Dog(String name, String sex){
         super(name, sex);
         favorite_food_ = randomFavFood();

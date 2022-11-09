@@ -1,12 +1,15 @@
 package de.buw.se4de;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 public abstract class Pet {
     protected String name_, sex_;
     protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
     protected int health = hunger_ + hygiene_ + attention_;
 
-    protected Date birthday_;
+    protected LocalDateTime birthday_;
+    protected Time age_;
+
     public Pet(){
         this.name_ = "None";
         this.sex_ = "None";
@@ -14,7 +17,7 @@ public abstract class Pet {
     public Pet(String name, String sex){
         this.name_ = name;
         this.sex_ = sex;
-        this.birthday_ = new Date();
+        this.birthday_ = LocalDateTime.now();
     }
 
     public Pet(String name, String sex, int hunger, int hygiene, int attention){
@@ -51,7 +54,13 @@ public abstract class Pet {
         return attention_;
     }
 
-    Date getBirthDay(){ return birthday_; }
+    LocalDateTime getBirthDay(){ return birthday_; }
+    Time getAge(){return age_;}
+
+    void setAge(Time newAge){
+        age_ = newAge;
+    }
+
 // Todo: berechnungen der variablen in den methoden anpassen
     public void feed(){
         if(hunger_ < 7){
@@ -103,7 +112,7 @@ public abstract class Pet {
 
     void getInformation(){
         System.out.println("*********************************************");
-        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + birthday_);
+        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " );
         System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health);
         System.out.println("*********************************************");
     }
