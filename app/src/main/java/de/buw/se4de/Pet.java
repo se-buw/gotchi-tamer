@@ -11,21 +11,25 @@ public abstract class Pet {
     protected Time age_;
 
     public Pet(){
-        this.name_ = "None";
-        this.sex_ = "None";
+        name_ = "None";
+        sex_ = "None";
     }
     public Pet(String name, String sex){
-        this.name_ = name;
-        this.sex_ = sex;
-        this.birthday_ = LocalDateTime.now();
+        name_ = name;
+        sex_ = sex;
+        birthday_ = LocalDateTime.now();
     }
-
-    public Pet(String name, String sex, int hunger, int hygiene, int attention){
-        this.name_ = name;
-        this.sex_ = sex;
-        this.hunger_ = hunger;
-        this.hygiene_ = hygiene;
-        this.attention_ = attention;
+    private LocalDateTime stringToLocalDateTime(String str){
+        LocalDateTime dateTime = LocalDateTime.parse(str);
+        return dateTime;
+    }
+    public Pet(String name, String sex, int hunger, int hygiene, int attention, String birthday){
+        name_ = name;
+        sex_ = sex;
+        hunger_ = hunger;
+        hygiene_ = hygiene;
+        attention_ = attention;
+        birthday_ = stringToLocalDateTime(birthday);
     }
 
     abstract String randomFavFood();
@@ -112,7 +116,7 @@ public abstract class Pet {
 
     void getInformation(){
         System.out.println("*********************************************");
-        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " );
+        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minuets_ + "M" );
         System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health);
         System.out.println("*********************************************");
     }

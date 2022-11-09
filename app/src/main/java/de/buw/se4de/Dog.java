@@ -35,8 +35,8 @@ class Dog extends Pet {
         favorite_toy_ = randomFavToy();
     }
 
-    public Dog(String name, String sex, int hunger, int hygiene, int attention, String fav_food, String fav_toy){
-        super(name, sex, hunger, hygiene, attention);
+    public Dog(String name, String sex, int hunger, int hygiene, int attention, String fav_food, String fav_toy, String birthday){
+        super(name, sex, hunger, hygiene, attention, birthday);
         this.favorite_food_ = fav_food;
         this.favorite_toy_ = fav_toy;
     }

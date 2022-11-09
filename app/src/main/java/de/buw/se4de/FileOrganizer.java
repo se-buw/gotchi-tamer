@@ -53,6 +53,7 @@ public class FileOrganizer {
             myWriter.write(pet.attention_ + "\n");
             myWriter.write(pet.getFavoriteFood() + "\n");
             myWriter.write(pet.getFavoriteToy() + "\n");
+            myWriter.write(pet.getBirthDay() + "\n");
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
