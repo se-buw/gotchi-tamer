@@ -33,7 +33,9 @@ public class Main {
         }
         //Todo andere Tiere und Filename
         if (selectedPet.equals("dog")){
+            System.out.println("1");
             Pet pet = new Dog(name, sex);
+            System.out.println("2");
             FileOrganizer file = new FileOrganizer();
             file.create_file(pet);
             file.write_file(pet);
