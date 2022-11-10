@@ -58,14 +58,13 @@ import java.time.LocalDateTime;
 public class App {
     public static String startNewGame(){
         String[] pets = {"dog", "cat"};
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println("Welcome to Tamagotchi.");
         System.out.println("In Tamagotchi you can create your own digital pet. The rule is easy, keep your pet alive!");
         System.out.println("That means simply, you have to take care of your pet");
         System.out.println("First, choose what kind of pet you want:");
         // listing what kinds of pets are available
-        for (String pet : pets){
-            System.out.println(pet);
-        }
+        System.out.println("You can choose between dog or cat!");
         Scanner input = new Scanner(System.in);
         String selectedPet = input.nextLine();
 

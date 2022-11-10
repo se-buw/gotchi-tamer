@@ -3,7 +3,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public abstract class Pet {
-    protected String name_, sex_;
+    protected String name_, sex_, stage_ = "Baby";
     protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
     protected int health = hunger_ + hygiene_ + attention_;
     protected LocalDateTime birthday_, lastLogout_;
@@ -45,7 +45,6 @@ public abstract class Pet {
     abstract String getFavoriteToy();
 
 
-    //Todo getter ändern mit Großbuchstaben
     public String get_name(){ return name_; }
 
     public String get_sex(){
@@ -70,7 +69,19 @@ public abstract class Pet {
     Time getAge(){return age_;}
 
     void setAge(){
-        age_ = new Time(Duration.between(birthday_, LocalDateTime.now()).toDays(), Duration.between(birthday_, LocalDateTime.now()).toHours(), Duration.between(birthday_, LocalDateTime.now()).toMinutes());;
+        age_ = new Time(Duration.between(birthday_, LocalDateTime.now()).toDays(), Duration.between(birthday_, LocalDateTime.now()).toHours(), Duration.between(birthday_, LocalDateTime.now()).toMinutes());
+        if (age_.days_ >= 2 && age_.days_ < 4){
+            stage_ = "Child";
+        }
+        else if (age_.days_ >= 4 && age_.days_ < 6){
+            stage_ = "Teenager";
+        }
+        else if (age_.days_ >= 6 && age_.days_ < 12){
+            stage_ = "Adult";
+        }
+        else if (age_.days_ >= 12){
+            stage_ = "Senior";
+        }
     }
     private void checkRange(){
         if (hunger_ < 0){
@@ -91,10 +102,11 @@ public abstract class Pet {
         if (attention_ > 10){
             attention_ = 10;
         }
+        health = hunger_ + hygiene_ + attention_;
+
     }
 
 
-// Todo: berechnungen der variablen in den methoden anpassen
     public void feed(String favorite){
         if (hunger_ == 10){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -147,7 +159,7 @@ public abstract class Pet {
     void getInformation(){
         System.out.println("*********************************************");
         setAge();
-        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" );
+        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" + "\t Stage: " + stage_);
         System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health);
         System.out.println("*********************************************");
     }
