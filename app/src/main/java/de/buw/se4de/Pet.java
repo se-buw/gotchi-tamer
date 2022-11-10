@@ -32,6 +32,7 @@ public abstract class Pet {
         attention_ = attention;
         birthday_ = stringToLocalDateTime(birthday);
         lastLogout_ = stringToLocalDateTime(lastLogout);
+        checkRange();
     }
 
     public abstract String getType();
@@ -71,53 +72,75 @@ public abstract class Pet {
     void setAge(){
         age_ = new Time(Duration.between(birthday_, LocalDateTime.now()).toDays(), Duration.between(birthday_, LocalDateTime.now()).toHours(), Duration.between(birthday_, LocalDateTime.now()).toMinutes());;
     }
+    private void checkRange(){
+        if (hunger_ < 0){
+            hunger_ = 0;
+        }
+        if (hunger_ > 10){
+            hunger_ = 10;
+        }
+        if (hygiene_ < 0){
+            hygiene_ = 0;
+        }
+        if (hygiene_ > 10){
+            hygiene_ = 10;
+        }
+        if (attention_ < 0){
+            attention_ = 0;
+        }
+        if (attention_ > 10){
+            attention_ = 10;
+        }
+    }
+
 
 // Todo: berechnungen der variablen in den methoden anpassen
-    public void feed(){
-        if(hunger_ < 7){
-            System.out.println("Before feeding: " + hunger_);
-            hunger_ += 3;
-            System.out.println("After feeding: " + hunger_);
-        }
-        else if (hunger_ <= 9 && hunger_ >= 7){
-            System.out.println("Before feeding: " + hunger_);
-            hunger_ = 10;
-            System.out.println("After feeding: " + hunger_);
-        }
-        else if (hunger_ == 10){
-            System.out.println(name_ +" is not hungry");
+    public void feed(String favorite){
+        if (hunger_ == 10){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            System.out.println(name_ +" is not hungry.");}
+        else {
+            if (getFavoriteFood().equals(favorite)) {
+                hunger_ += 5;
+                attention_ += 1;
+                checkRange();
+            } else {
+                hunger_ += 3;
+                checkRange();
+            }
+            hygiene_ -= 2;
+            checkRange();
         }
     }
 
-    public void clean(){
-        if(hygiene_ < 7){
-            System.out.println("Before cleaning: " + hygiene_);
+    public void clean(String cleaning){
+        if(hygiene_ == 10){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            System.out.println(name_ +" is clean enough.");
+        }
+        else {
             hygiene_ += 3;
-            System.out.println("After cleaning: " + hygiene_);
+            checkRange();
         }
-        else if (hygiene_ <= 9 && hygiene_ >= 7){
-            System.out.println("Before cleaning: " + hygiene_);
-            hygiene_ = 10;
-            System.out.println("After cleaning: " + hygiene_);
-        }
-        else if (hygiene_ == 10){
-            System.out.println(name_ +" is clean enough");
-        }
+
     }
 
-    public void play(){
-        if(attention_ < 7){
-            System.out.println("Before playing: " + attention_);
-            attention_ += 3;
-            System.out.println("After playing: " + attention_);
-        }
-        else if (attention_ <= 9 && attention_ >= 7){
-            System.out.println("Before playing: " + attention_);
-            attention_ = 10;
-            System.out.println("After playing: " + attention_);
-        }
-        else if (attention_ == 10){
-            System.out.println(name_ +" doesn't want to play with you anymore.");
+    public void play(String favorite){
+
+        if (attention_ == 10){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            System.out.println(name_ +" doesn't want to play with you anymore.");}
+        else {
+            if (getFavoriteToy().equals(favorite)) {
+                attention_ += 5;
+                checkRange();
+            } else {
+                attention_ += 3;
+                checkRange();
+            }
+            hunger_ -= 2;
+            hygiene_ -= 2;
+            checkRange();
         }
     }
 

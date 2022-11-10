@@ -18,12 +18,12 @@ public class FileOrganizer {
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File already existed.");
             }
         } catch (
                 IOException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -58,13 +58,13 @@ public class FileOrganizer {
             myWriter.write(pet.getBirthDay() + "\n");
             myWriter.write(LocalDateTime.now() + "\n");
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("Successfully created a new pet.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
-// Todo: problem-> was ist wenn die datei nicht vorhanden ist?
+
     public String[] load_file(String name) throws IOException {
         try {
             FileReader fileReader = new FileReader(name+".txt");
@@ -77,8 +77,10 @@ public class FileOrganizer {
             bufferedReader.close();
             return lines.toArray(new String[lines.size()]);
         } catch (IOException e) {
-            System.out.println("could not load a game!");
-            System.out.println("You did not play this game before. Please start a new game!");
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            System.out.println("Could not load a game!");
+            System.out.println("Apparently the given name is not correct or you did not play this game before.");
+            System.out.println("Please check your input or start a new game!");
             // e.printStackTrace();
 
         }

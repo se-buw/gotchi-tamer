@@ -68,8 +68,9 @@ public class App {
         }
         Scanner input = new Scanner(System.in);
         String selectedPet = input.nextLine();
-        // Todo für gesamte Pets Array
+
         while (!selectedPet.equals(pets[0]) && !selectedPet.equals(pets[1])){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println("You can only choose from the listed pets above!");
             selectedPet = input.nextLine().toLowerCase();
         }
@@ -79,10 +80,11 @@ public class App {
         System.out.println("You can choose between male and female.");
         String sex = input.nextLine().toLowerCase();
         while(!sex.equals("male") && !sex.equals("female")){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println("Please write male or female.");
             sex = input.nextLine().toLowerCase();
         }
-        //Todo andere Tiere und Filename
+
         if (selectedPet.equals("dog")){
             Pet pet = new Dog("dog",name, sex);
             FileOrganizer file = new FileOrganizer();
@@ -98,8 +100,6 @@ public class App {
         return name;
     }
     public static void startGame(Pet pet){
-        long pastTime = Duration.between(pet.getLastLogout(), LocalDateTime.now()).toMinutes();
-        System.out.println("Time that has been past, since the last logout: " + pastTime + " min.");
         pet.getInformation();
         displayChoices();
         Scanner sr = new Scanner(System.in);
@@ -116,19 +116,19 @@ public class App {
                     do {
                         switch (input) {
                             case "apple" -> {
-                                pet.feed();
+                                pet.feed("apple");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
                             }
                             case "bread" -> {
-                                pet.feed();
+                                pet.feed("bread");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
                             }
                             case "steak" -> {
-                                pet.feed();
+                                pet.feed("steak");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
@@ -139,6 +139,7 @@ public class App {
                                 displayChoices();
                             }
                             default -> {
+                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                                 System.out.println("That is not a valid command!");
                                 System.out.println("Please select from the listed food above!");
                                 input = sr.nextLine().toLowerCase();
@@ -154,19 +155,19 @@ public class App {
                     do {
                         switch (input) {
                             case "bath" -> {
-                                pet.clean();
+                                pet.clean("bath");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
                             }
                             case "toilet" -> {
-                                pet.clean();
+                                pet.clean("toilet");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
                             }
                             case "grooming" -> {
-                                pet.clean();
+                                pet.clean("grooming");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
@@ -177,6 +178,7 @@ public class App {
                                 displayChoices();
                             }
                             default -> {
+                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                                 System.out.println("That is not a valid command!");
                                 System.out.println("Please select from the listed clean activities above!");
                                 input = sr.nextLine().toLowerCase();
@@ -192,19 +194,19 @@ public class App {
                     do {
                         switch (input) {
                             case "ball" -> {
-                                pet.play();
+                                pet.play("ball");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
                             }
                             case "stick" -> {
-                                pet.play();
+                                pet.play("stick");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
                             }
                             case "yarn" -> {
-                                pet.play();
+                                pet.play("yarn");
                                 back = true;
                                 pet.getInformation();
                                 displayChoices();
@@ -215,6 +217,7 @@ public class App {
                                 displayChoices();
                             }
                             default -> {
+                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                                 System.out.println("That is not a valid command!");
                                 System.out.println("Please select from the listed toys above!");
                                 input = sr.nextLine().toLowerCase();
@@ -231,7 +234,10 @@ public class App {
                     file.write_file(pet);
                     close = true;
                 }
-                default -> System.out.println("That is not a valid command!");
+                default -> {
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    System.out.println("That is not a valid command!");
+                }
             }
         } while (!close);
     }
@@ -240,23 +246,30 @@ public class App {
     public static Pet loadGame(String name) throws IOException{
         FileOrganizer file = new FileOrganizer();
         String[] attributes = file.load_file(name);
+        Pet none = new Dog();
         if (attributes.length == 0){
-            Pet none = new Dog();
             return none;
         }
-		Pet pet = new Dog("dog","none", "none");
-		if (attributes[0].equals("dog")){
+        Pet pet = new Dog();
+        long timePast = Duration.between(LocalDateTime.parse(attributes[9]), LocalDateTime.now()).toHours();
+        int i = (int)timePast;
+        if (attributes[0].equals("dog")){
 			pet = new Dog(attributes[0], attributes[1], attributes[2],
-					Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]),
-					Integer.parseInt(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
+					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
+					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
 		if (attributes[0].equals("cat")){
 			pet = new Cat(attributes[0], attributes[1], attributes[2],
-					Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]),
-					Integer.parseInt(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
+					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
+					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
         if((pet.hunger_ + pet.attention_ + pet.hygiene_ ) == 0){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(pet.name_ + " died!");
+            System.out.println(pet.name_ + " R.I.P");
+            System.out.println("You are a terrible owner!!");
+            System.out.println(" :( \t :( \t :( \t :( \t :( \t :( \t :( ");
+            return none;
         }
         return pet;
 
@@ -284,17 +297,18 @@ public class App {
                 String petName = startNewGame();
                 Pet pet = loadGame(petName);
                 if (pet.get_name().equals("None")) {
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     System.out.println("Something went wrong! Please try again!");
                 } else {
                     startGame(pet);
                     quit = true;
                 }
             } else if (command.equals("load")) {
-                System.out.println("What is the name of the pet you want interact with?");
+                System.out.println("What is the name of the pet you want to interact with?");
                 command = scanner.nextLine().toLowerCase();
                 Pet pet = loadGame(command);
                 if (pet.get_name().equals("None")) {
-                    System.out.println("**** In this case please write create! ****");
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 } else {
                     startGame(pet);
                     quit = true;
@@ -304,6 +318,7 @@ public class App {
                 quit = true;
             }
             else {
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 System.out.println("That is not a valid choice!");
             }
         }while (!quit);
