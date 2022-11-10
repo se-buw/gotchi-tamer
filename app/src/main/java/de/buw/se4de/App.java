@@ -57,7 +57,7 @@ import java.time.LocalDateTime;
 
 public class App {
     public static String startNewGame(){
-        String[] pets = {"dog"};
+        String[] pets = {"dog", "cat"};
         System.out.println("Welcome to Tamagotchi.");
         System.out.println("In Tamagotchi you can create your own digital pet. The rule is easy, keep your pet alive!");
         System.out.println("That means simply, you have to take care of your pet");
@@ -69,7 +69,7 @@ public class App {
         Scanner input = new Scanner(System.in);
         String selectedPet = input.nextLine();
         // Todo für gesamte Pets Array
-        while (!selectedPet.equals(pets[0])){
+        while (!selectedPet.equals(pets[0]) && !selectedPet.equals(pets[1])){
             System.out.println("You can only choose from the listed pets above!");
             selectedPet = input.nextLine().toLowerCase();
         }
@@ -84,15 +84,21 @@ public class App {
         }
         //Todo andere Tiere und Filename
         if (selectedPet.equals("dog")){
-            Pet pet = new Dog(name, sex);
+            Pet pet = new Dog("dog",name, sex);
             FileOrganizer file = new FileOrganizer();
             file.create_file(pet);
             file.write_file(pet);
         }
+		else if (selectedPet.equals("cat")){
+			Pet pet = new Cat("cat", name, sex);
+			FileOrganizer file = new FileOrganizer();
+			file.create_file(pet);
+			file.write_file(pet);
+		}
         return name;
     }
     public static void startGame(Pet pet){
-        long pastTime = Duration.between(pet.getBirthDay(), LocalDateTime.now()).toMinutes();
+        long pastTime = Duration.between(pet.getLastLogout(), LocalDateTime.now()).toMinutes();
         System.out.println("Time that has been past, since the last logout: " + pastTime + " min.");
         pet.getInformation();
         displayChoices();
@@ -238,9 +244,17 @@ public class App {
             Pet none = new Dog();
             return none;
         }
-        Pet pet = new Dog(attributes[0], attributes[1], Integer.parseInt(attributes[2]),
-                Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]),
-                attributes[5], attributes[6], attributes[7], attributes[8]);
+		Pet pet = new Dog("dog","none", "none");
+		if (attributes[0].equals("dog")){
+			pet = new Dog(attributes[0], attributes[1], attributes[2],
+					Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]),
+					Integer.parseInt(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
+		}
+		if (attributes[0].equals("cat")){
+			pet = new Cat(attributes[0], attributes[1], attributes[2],
+					Integer.parseInt(attributes[3]), Integer.parseInt(attributes[4]),
+					Integer.parseInt(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
+		}
         if((pet.hunger_ + pet.attention_ + pet.hygiene_ ) == 0){
             System.out.println(pet.name_ + " died!");
         }

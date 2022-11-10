@@ -47,6 +47,7 @@ public class FileOrganizer {
         try {
             FileWriter myWriter = new FileWriter(pet.get_name()+".txt");
             //FileWriter myWriter = new FileWriter("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+            myWriter.write(pet.getType() +"\n");
             myWriter.write(pet.name_ + "\n");
             myWriter.write(pet.sex_ + "\n");
             myWriter.write(pet.hunger_ + "\n");

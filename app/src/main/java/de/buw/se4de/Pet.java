@@ -6,7 +6,7 @@ public abstract class Pet {
     protected String name_, sex_;
     protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
     protected int health = hunger_ + hygiene_ + attention_;
-    protected LocalDateTime birthday_, lastLogout_, timeNow_;
+    protected LocalDateTime birthday_, lastLogout_;
     protected Time age_;
 
     public Pet(){
@@ -34,12 +34,15 @@ public abstract class Pet {
         lastLogout_ = stringToLocalDateTime(lastLogout);
     }
 
+    public abstract String getType();
+
     abstract String randomFavFood();
     abstract String randomFavToy();
 
     abstract String getFavoriteFood();
 
     abstract String getFavoriteToy();
+
 
     //Todo getter ändern mit Großbuchstaben
     public String get_name(){ return name_; }
@@ -61,6 +64,8 @@ public abstract class Pet {
     }
 
     LocalDateTime getBirthDay(){ return birthday_; }
+
+    LocalDateTime getLastLogout(){ return lastLogout_; }
     Time getAge(){return age_;}
 
     void setAge(){
