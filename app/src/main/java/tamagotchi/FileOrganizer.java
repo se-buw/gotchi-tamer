@@ -1,4 +1,4 @@
-package de.buw.se4de;
+package tamagotchi;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,11 +48,11 @@ public class FileOrganizer {
             FileWriter myWriter = new FileWriter(pet.get_name()+".txt");
             //FileWriter myWriter = new FileWriter("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
             myWriter.write(pet.getType() +"\n");
-            myWriter.write(pet.name_ + "\n");
-            myWriter.write(pet.sex_ + "\n");
-            myWriter.write(pet.hunger_ + "\n");
-            myWriter.write(pet.hygiene_ + "\n");
-            myWriter.write(pet.attention_ + "\n");
+            myWriter.write(pet.name + "\n");
+            // myWriter.write(pet.sex_ + "\n");
+            myWriter.write(pet.hunger + "\n");
+            myWriter.write(pet.hygiene + "\n");
+            myWriter.write(pet.attention + "\n");
             myWriter.write(pet.getFavoriteFood() + "\n");
             myWriter.write(pet.getFavoriteToy() + "\n");
             myWriter.write(pet.getBirthDay() + "\n");

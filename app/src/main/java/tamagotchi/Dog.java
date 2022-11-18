@@ -1,9 +1,9 @@
-package de.buw.se4de;
+package tamagotchi;
 import java.util.Random;
 import java.lang.Math;
 
-class Cat extends Pet {
-    protected String favorite_food_, favorite_toy_, type_ = "cat";
+class Dog extends Pet {
+    protected String favorite_food_, favorite_toy_, type_ = "dog";
 
     @Override
     public String getFavoriteFood(){
@@ -29,19 +29,20 @@ class Cat extends Pet {
         String fav_toy = toy[Math.abs(random_number.nextInt()) % toy.length];
         return fav_toy;
     }
-    Cat(){
+    Dog(){
         super();
     }
-    public Cat(String type, String name, String sex){
+    public Dog(String type, String name, String sex){
         super(name, sex);
         type_ = type;
         favorite_food_ = randomFavFood();
         favorite_toy_ = randomFavToy();
     }
 
-    public Cat(String type, String name, String sex, int hunger, int hygiene, int attention, String fav_food, String fav_toy, String birthday, String lastLogout){
+    public Dog(String type, String name, String sex, int hunger, int hygiene, int attention, String fav_food, String fav_toy, String birthday, String lastLogout){
         super(name, sex, hunger, hygiene, attention, birthday, lastLogout);
         this.favorite_food_ = fav_food;
         this.favorite_toy_ = fav_toy;
+        this.type_ = type;
     }
 }
