@@ -1,4 +1,4 @@
-package de.buw.se4de;
+package tamagotchi;
 
 public class Time {
     long days_ = 0, hours_ = 0, minutes_ = 0;
