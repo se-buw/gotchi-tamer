@@ -6,12 +6,13 @@ package tamagotchi;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-
+/*
 class GameTest {
 	@Test
 	void appHasAGreeting() {
-		Game classUnderTest = new Game();
+		GameDeprecated classUnderTest = new GameDeprecated();
 		System.setIn(new ByteArrayInputStream("Jan".getBytes()));
 		assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
 	}
 }
+*/

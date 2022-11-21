@@ -26,11 +26,13 @@ dependencies {
     // working with CSV files
     // https://github.com/eugenp/tutorials/tree/master/libraries-apache-commons-io
     implementation 'org.apache.commons:commons-csv:1.9.0'
+
+    implementation 'info.picocli:picocli:4.7.0'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'de.buw.se4de.App'
+    mainClass = 'tamagotchi.Game'
 }
 
 run {

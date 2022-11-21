@@ -1,6 +1,6 @@
 package tamagotchi;
 
-public class Food {
+public abstract class Food {
     String name;
     int energy;
 
@@ -30,4 +30,8 @@ class Steak extends Food{
     public Steak() {
         super("steak", 4);
     }
+}
+
+class Tuna extends Food{
+    public Tuna(){super("tuna", 4);}
 }
