@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 
+
 public class Game {
 
     public static Pet startNewGame() throws IOException {
@@ -40,12 +41,12 @@ public class Game {
 
         if (selectedPet.equals("dog")){
             Pet pet = new Dog(name);
-            // write_file(pet);
+            write_file(pet);
             return pet;
         }
         else {
             Pet pet = new Cat(name);
-            // write_file(pet);
+            write_file(pet);
             return pet;
         }
     }
@@ -242,16 +243,21 @@ public class Game {
 
     static void write_file(Pet pet) throws IOException {
 
-        FileOutputStream f = new FileOutputStream(pet.name + ".txt");
-        ObjectOutputStream o = new ObjectOutputStream(f);
+        //change the path
+        String filepath = "C:\\Users\\ufimt\\Desktop\\Projects\\Gotchi tamer\\gotchi-tamer\\"+ pet.name + ".txt";
+        try {
 
-        // Write objects to file
-        o.writeObject(pet);
+            FileOutputStream fileOut = new FileOutputStream(filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(pet);
+            objectOut.close();
+            //System.out.println("The Object  was succesfully written to a file");
 
-        o.close();
-        f.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
     }
-
     static Pet read_file(String nameOfPet) throws IOException, ClassNotFoundException {
 
         FileInputStream fi = new FileInputStream(nameOfPet + ".txt");

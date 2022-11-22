@@ -1,6 +1,8 @@
 package tamagotchi;
 
-public abstract class Toy {
+import java.io.Serializable;
+
+public abstract class Toy implements Serializable {
     String name;
     int fun;
 
