@@ -12,12 +12,7 @@ public abstract class Toy implements Serializable {
         this.name = name;
         this.fun = fun;
     }
-/*
-    public interactive_play(Toy toy){
-        Random rand = new Random();
-        int upperbound = 2;
-        int random = rand.nextInt(upperbound);
-    }*/
+
 }
 
 class Ball extends Toy{

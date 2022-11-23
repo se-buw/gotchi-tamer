@@ -3,6 +3,8 @@ package tamagotchi;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Random;
+import java.util.Scanner;
 
 public abstract class Pet implements Serializable {
     protected String name;
@@ -75,18 +77,65 @@ public abstract class Pet implements Serializable {
 // when would the pet not want to play? consider adding attribute boredom
         if (boredom == 0) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println("I don't want to play with you anymore.");
-            if (toy == favoriteToy) {
-                boredom += 5;
-                checkRange();
-            } else {
-                boredom += 3;
-                checkRange();
+            System.out.println("I don't want to play with you anymore.");}
+        else {
+            Random rand = new Random();
+            Scanner sr = new Scanner(System.in);
+            String side = null;
+            boolean finished = false;
+            int tries = 0;
+
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            System.out.println("I want you to play with me! You should pick the same side as I do.");
+
+            while (!finished) {
+                int random = rand.nextInt(2);
+                //0 - left, 1 - center, 2 - right
+                if (random == 0) {
+                    side = "left";
+                } else if (random == 1) {
+                    side = "center";
+                } else if (random == 2) {
+                    side = "right";
+                }
+                System.out.println("What side do you choose?");
+                System.out.println("left \t center \t right");
+                String input = sr.nextLine().toLowerCase();
+                
+                if (input.equals(side)) {
+                    System.out.println("You got it right! I like playing with you!");
+                    if (toy == favoriteToy) {
+                        boredom += toy.fun + 2;
+                        checkRange();
+                        finished = true;
+                    } else {
+                        boredom += toy.fun + 1;
+                        checkRange();
+                        finished = true;
+                    }
+                } else {
+                    System.out.println("You got it wrong :( Do you want to have another try?");
+                    System.out.println("yes \t no");
+                    Scanner sr1 = new Scanner(System.in);
+                    String input2 = sr1.nextLine().toLowerCase();
+                    if (input2.equals("no")){
+                        finished = true;
+                    }
+                    else if (input2.equals("yes")){
+                        tries += 1;
+                        if (tries == 3)
+                        {
+                            System.out.println("Sorry. I am tired of playing.");
+                            finished = true;
+                        }
+                    }
+                }
             }
-            dirtiness -= 2;
-            checkRange();
         }
-    }
+        dirtiness -= 2;
+        checkRange();
+        }
+
 
     private void checkRange(){
         if (hunger < 0){
