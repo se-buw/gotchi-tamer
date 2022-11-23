@@ -1,8 +1,10 @@
 package tamagotchi;
 
 import java.io.Serializable;
+import java.util.Random;
 
 public abstract class Toy implements Serializable {
+    private static final long serialVersionUID = 1L;
     String name;
     int fun;
 
@@ -10,22 +12,28 @@ public abstract class Toy implements Serializable {
         this.name = name;
         this.fun = fun;
     }
+/*
+    public interactive_play(Toy toy){
+        Random rand = new Random();
+        int upperbound = 2;
+        int random = rand.nextInt(upperbound);
+    }*/
 }
 
 class Ball extends Toy{
     public Ball(){
-        super("Ball", 6);
+        super("Ball", 3);
     }
 }
 
 class Stick extends Toy{
     public Stick(){
-        super("Stick", 4);
+        super("Stick", 1);
     }
 }
 
 class Yarn extends Toy{
     public Yarn(){
-        super("Yarn", 5);
+        super("Yarn", 2);
     }
 }

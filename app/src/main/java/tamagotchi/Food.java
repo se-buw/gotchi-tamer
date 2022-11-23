@@ -6,13 +6,11 @@ public abstract class Food implements Serializable {
     String name;
     int energy;
 
+    private static final long serialVersionUID = 11L;
+
     public Food(String name, int energy){
         this.name = name;
         this.energy = energy;
-    }
-
-    void printInfo(){
-
     }
 }
 

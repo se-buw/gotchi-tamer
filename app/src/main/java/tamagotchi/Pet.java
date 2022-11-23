@@ -14,6 +14,8 @@ public abstract class Pet implements Serializable {
     protected int boredom;
     protected int hunger;
 
+    private static final long serialVersionUID = 10L;
+
     public Pet(String name, Food favoriteFood, Toy favoriteToy){
         this.name = name;
         this.birthday = LocalDateTime.now();
@@ -109,7 +111,7 @@ public abstract class Pet implements Serializable {
     void printInfo(){
         System.out.println("*********************************************");
         System.out.println("Name: " + name + "\t Age: " + computeAge().days_ + "D " + computeAge().hours_ + "H "+ computeAge().minutes_ + "M" + "\t Stage: " + computeStage());
-        System.out.println("Hunger: " + hunger + "\t Hygiene: " + dirtiness + "\t Attention: " + boredom);
+        System.out.println("Hunger: " + hunger + "\t Dirtiness: " + dirtiness + "\t Boredom: " + boredom);
         System.out.println("*********************************************");
     }
 
