@@ -1,10 +1,7 @@
 package tamagotchi;
 
 import java.io.*;
-import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.time.LocalDateTime;
 
 
 public class Game {
@@ -41,12 +38,12 @@ public class Game {
 
         if (selectedPet.equals("dog")){
             Pet pet = new Dog(name);
-            write_file(pet);
+            save_pet(pet);
             return pet;
         }
         else {
             Pet pet = new Cat(name);
-            write_file(pet);
+            save_pet(pet);
             return pet;
         }
     }
@@ -176,12 +173,12 @@ public class Game {
                     } while (!back);
                 }
                 case "save" -> {
-                    write_file(pet);
+                    save_pet(pet);
                     pet.printInfo();
                     displayChoices();
                 }
                 case "close" -> {
-                    write_file(pet);
+                    save_pet(pet);
                     close = true;
                 }
                 default -> {
@@ -223,7 +220,7 @@ public class Game {
             } else if (command.equals("load")) {
                 System.out.println("What is the name of the pet you want to interact with?");
                 String NameOfPet = scanner.nextLine().toLowerCase();
-                Pet pet = read_file(NameOfPet);
+                Pet pet = read_pet(NameOfPet);
                 if (pet.name.equals("None")) {
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 } else {
@@ -241,24 +238,42 @@ public class Game {
         }while (!quit);
     }
 
-    static void write_file(Pet pet) throws IOException {
+    static File create_file(String name) {
+        try {
+            File temp = new File(name + ".txt");
 
-        //change the path
-        String filepath = "C:\\Users\\ufimt\\Desktop\\Projects\\Gotchi tamer\\gotchi-tamer\\"+ pet.name + ".txt";
+            if (temp.createNewFile()) {
+                System.out.println("File created: " + temp.getName());
+                return temp;
+            } else {
+                System.out.println("File already existed.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+        return null;
+    }
+
+    static void save_pet(Pet pet) throws IOException {
+
+        String filePath = create_file(pet.name).getAbsolutePath();
+        // String filePath = new File("").getAbsolutePath();
+        // filePath.concat(pet.name + ".txt");
+
         try {
 
-            FileOutputStream fileOut = new FileOutputStream(filepath);
+            FileOutputStream fileOut = new FileOutputStream(filePath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(pet);
             objectOut.close();
-            //System.out.println("The Object  was succesfully written to a file");
+            System.out.println("The object  was succesfully written to a file");
 
         } catch (Exception ex) {
             ex.printStackTrace();
 
         }
     }
-    static Pet read_file(String nameOfPet) throws IOException, ClassNotFoundException {
+    static Pet read_pet(String nameOfPet) throws IOException, ClassNotFoundException {
 
         FileInputStream fi = new FileInputStream(nameOfPet + ".txt");
         ObjectInputStream oi = new ObjectInputStream(fi);
