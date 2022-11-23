@@ -118,6 +118,12 @@ public abstract class Pet implements Serializable {
                     System.out.println("yes \t no");
                     Scanner sr1 = new Scanner(System.in);
                     String input2 = sr1.nextLine().toLowerCase();
+
+                    while(!input2.equals("yes") && !input2.equals("no")){
+                            System.out.println("That is not a valid answer!");
+                            System.out.println("Please answer yes or no.");
+                            input2 = sr.nextLine().toLowerCase();
+                    }
                     if (input2.equals("no")){
                         finished = true;
                     }
