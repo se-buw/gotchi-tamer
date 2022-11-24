@@ -229,7 +229,8 @@ public class Game {
                                 case "wake up" -> {
                                     back = true;
                                     pet.sleeping = false;
-                                    pet.boredom = 0;
+                                    pet.boredom -= 2;
+                                    pet.hunger += 1;
                                     pet.printInfo();
                                     displayChoices();
                                 }
