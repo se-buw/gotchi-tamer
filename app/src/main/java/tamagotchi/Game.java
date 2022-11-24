@@ -328,7 +328,8 @@ public class Game {
     static void write_file(Pet pet) throws IOException {
 
         //change the path
-        String filepath = "C:\\Users\\ufimt\\Desktop\\Projects\\Gotchi tamer\\gotchi-tamer\\"+ pet.name + ".txt";
+        File file = new File(pet.name + ".txt");
+        String filepath = file.getAbsolutePath();
         try {
 
             FileOutputStream fileOut = new FileOutputStream(filepath);
