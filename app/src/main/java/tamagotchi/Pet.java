@@ -24,6 +24,9 @@ public abstract class Pet implements Serializable {
         this.birthday = LocalDateTime.now();
         this.favoriteFood = favoriteFood;
         this.favoriteToy = favoriteToy;
+        this.dirtiness = 5;
+        this.boredom = 5;
+        this.hunger = 5;
     }
 
     protected Time computeAge(){
@@ -79,7 +82,7 @@ public abstract class Pet implements Serializable {
 // when would the pet not want to play? consider adding attribute boredom
         if (boredom == 0) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println("I don't want to play with you anymore.");}
+            System.out.println("I don't want to play with you yet.");}
         else {
             Random rand = new Random();
             Scanner sr = new Scanner(System.in);
@@ -107,11 +110,11 @@ public abstract class Pet implements Serializable {
                 if (input.equals(side)) {
                     System.out.println("You got it right! I like playing with you!");
                     if (toy == favoriteToy) {
-                        boredom += toy.fun + 2;
+                        boredom -= toy.fun + 2;
                         checkRange();
                         finished = true;
                     } else {
-                        boredom += toy.fun + 1;
+                        boredom -= toy.fun + 1;
                         checkRange();
                         finished = true;
                     }
@@ -140,7 +143,7 @@ public abstract class Pet implements Serializable {
                 }
             }
         }
-        dirtiness -= 2;
+        dirtiness += 2;
         checkRange();
         }
 
@@ -165,6 +168,24 @@ public abstract class Pet implements Serializable {
             boredom = 10;
         }
     }
+
+    public boolean check_death(){
+        if ((this.hunger + this.boredom + this.dirtiness) == 30) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void dead(){
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(this.name + " died!");
+        System.out.println(this.name + " R.I.P");
+        System.out.println("You are a terrible owner!!");
+        System.out.println(" :( \t :( \t :( \t :( \t :( \t :( \t :( ");
+    }
+
+
     void printInfo(){
         System.out.println("*********************************************");
         System.out.println("Name: " + name + "\t Age: " + computeAge().days_ + "D " + computeAge().hours_ + "H "+ computeAge().minutes_ + "M" + "\t Stage: " + computeStage());

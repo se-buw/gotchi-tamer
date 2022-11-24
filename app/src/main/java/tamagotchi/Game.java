@@ -55,112 +55,165 @@ public class Game {
         displayChoices();
         Scanner sr = new Scanner(System.in);
         boolean close = false;
-        do {
-            String input = sr.nextLine().toLowerCase();
-            boolean back = false;
-            if(pet.sleeping){input = "sleep";}
-            switch (input) {
-                case "feed" -> {
-                    System.out.println("What do you want to feed " + pet.name + "?");
-                    System.out.println("apple \t bread \t steak \t back");
-                    input = sr.nextLine().toLowerCase();
-                    do {
-                        switch (input) {
-                            case "apple" -> {
-                                pet.feed(new Apple());
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
+            do {
+                String input = sr.nextLine().toLowerCase();
+                boolean back = false;
+
+                switch (input) {
+                    case "feed" -> {
+                        System.out.println("What do you want to feed " + pet.name + "?");
+                        System.out.println("apple \t bread \t steak \t tuna \t back");
+                        input = sr.nextLine().toLowerCase();
+                        do {
+                            switch (input) {
+                                case "apple" -> {
+                                    pet.feed(new Apple());
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "bread" -> {
+                                    pet.feed(new Bread());
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "steak" -> {
+                                    pet.feed(new Steak());
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "tuna" -> {
+                                    pet.feed(new Tuna());
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "back" -> {
+                                    back = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                default -> {
+                                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                                    System.out.println("That is not a valid command!");
+                                    System.out.println("Please select from the listed food above!");
+                                    input = sr.nextLine().toLowerCase();
+                                }
                             }
-                            case "bread" -> {
-                                pet.feed(new Bread());
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
+                        } while (!back);
+                    }
+                    case "clean" -> {
+                        System.out.println("What do you want to clean for " + pet.name + "?");
+                        System.out.println("bath \t toilet \t grooming \t back");
+                        input = sr.nextLine().toLowerCase();
+                        back = false;
+                        do {
+                            switch (input) {
+                                case "bath" -> {
+                                    pet.clean("bath");
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "toilet" -> {
+                                    pet.clean("toilet");
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "grooming" -> {
+                                    pet.clean("grooming");
+                                    back = true;
+                                    if (!pet.check_death())
+                                    {
+                                        pet.printInfo();
+                                        displayChoices();
+                                    }
+                                    else {pet.dead();
+                                        close = true;}
+                                }
+                                case "back" -> {
+                                    back = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                default -> {
+                                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                                    System.out.println("That is not a valid command!");
+                                    System.out.println("Please select from the listed clean activities above!");
+                                    input = sr.nextLine().toLowerCase();
+                                }
                             }
-                            case "steak" -> {
-                                pet.feed(new Steak());
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            case "back" -> {
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            default -> {
-                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                System.out.println("That is not a valid command!");
-                                System.out.println("Please select from the listed food above!");
-                                input = sr.nextLine().toLowerCase();
-                            }
-                        }
-                    } while (!back);
-                }
-                case "clean" -> {
-                    System.out.println("What do you want to clean for " + pet.name + "?");
-                    System.out.println("bath \t toilet \t grooming \t back");
-                    input = sr.nextLine().toLowerCase();
-                    back = false;
-                    do {
-                        switch (input) {
-                            case "bath" -> {
-                                pet.clean("bath");
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            case "toilet" -> {
-                                pet.clean("toilet");
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            case "grooming" -> {
-                                pet.clean("grooming");
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            case "back" -> {
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            default -> {
-                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                System.out.println("That is not a valid command!");
-                                System.out.println("Please select from the listed clean activities above!");
-                                input = sr.nextLine().toLowerCase();
-                            }
-                        }
-                    } while (!back);
-                }
-                case "play" -> {
-                    System.out.println("What do you want to play with " + pet.name + "?");
-                    System.out.println("ball \t stick \t yarn \t back");
-                    input = sr.nextLine().toLowerCase();
-                    back = false;
-                    do {
-                        switch (input) {
-                            case "ball" -> {
-                                pet.play(new Ball());
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            case "stick" -> {
-                                pet.play(new Stick());
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
-                            }
-                            case "yarn" -> {
-                                pet.play(new Yarn());
-                                back = true;
-                                pet.printInfo();
-                                displayChoices();
+                        } while (!back);
+                    }
+                    case "play" -> {
+                        System.out.println("What do you want to play with " + pet.name + "?");
+                        System.out.println("ball \t stick \t yarn \t back");
+                        input = sr.nextLine().toLowerCase();
+                        back = false;
+                        do {
+                            switch (input) {
+                                case "ball" -> {
+                                    pet.play(new Ball());
+                                    back = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                case "stick" -> {
+                                    pet.play(new Stick());
+                                    back = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                case "yarn" -> {
+                                    pet.play(new Yarn());
+                                    back = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                case "back" -> {
+                                    back = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                default -> {
+                                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                                    System.out.println("That is not a valid command!");
+                                    System.out.println("Please select from the listed toys above!");
+                                    input = sr.nextLine().toLowerCase();
+                                }
                             }
                             case "back" -> {
                                 back = true;
@@ -226,13 +279,9 @@ public class Game {
                     write_file(pet);
                     close = true;
                 }
-                default -> {
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                    System.out.println("That is not a valid command!");
-                }
-            }
-        } while (!close);
-    }
+            } while (!close);
+        }
+
 
     public static void displayChoices(){
         System.out.println("Interactions with the pet:");
@@ -349,9 +398,6 @@ public class Game implements Runnable{
         }
 
         //select which pet you want to play with
-
-
-
         }
     }
 
