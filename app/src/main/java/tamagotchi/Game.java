@@ -58,6 +58,7 @@ public class Game {
         do {
             String input = sr.nextLine().toLowerCase();
             boolean back = false;
+            if(pet.sleeping){input = "sleep";}
             switch (input) {
                 case "feed" -> {
                     System.out.println("What do you want to feed " + pet.name + "?");
@@ -175,6 +176,47 @@ public class Game {
                         }
                     } while (!back);
                 }
+                case "sleep" -> {
+                    if(pet.sleeping){
+                        System.out.println("ZzzzzzzZZZzzzzZZZzzzzZZZZzzzzzzzzZZzz");
+                        System.out.println("(" + pet.name + " is sleeping.)");
+                        // System.out.println("What do you want to do?");
+                        System.out.println("wake up \t back");
+                        input = sr.nextLine().toLowerCase();
+                        do{
+                            switch(input){
+                                case "wake up" ->{
+                                    back = true;
+                                    pet.sleeping = false;
+                                    pet.boredom = 0;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                            }
+                        } while (!back);
+                    }else{
+                        System.out.println("Do you want to put " + pet.name + " to sleep?");
+                       // System.out.println("I don't want to sleep.. It's too early.\n");
+                        System.out.println("yes \t no \t");
+                        input = sr.nextLine().toLowerCase();
+                        do{
+                            switch(input){
+                                case "yes" ->{
+                                    back = true;
+                                    pet.sleeping = true;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                                case "no" ->{
+                                    back = true;
+                                    pet.sleeping = false;
+                                    pet.printInfo();
+                                    displayChoices();
+                                }
+                            }
+                        } while (!back);
+                    }
+                }
                 case "save" -> {
                     write_file(pet);
                     pet.printInfo();
@@ -194,7 +236,7 @@ public class Game {
 
     public static void displayChoices(){
         System.out.println("Interactions with the pet:");
-        System.out.println("feed \t clean \t play \t save \t close");
+        System.out.println("feed \t clean \t play \t sleep \t save \t close");
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {

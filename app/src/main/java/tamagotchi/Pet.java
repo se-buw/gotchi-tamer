@@ -12,9 +12,10 @@ public abstract class Pet implements Serializable {
     protected LocalDateTime birthday;
     protected Food favoriteFood;
     protected Toy favoriteToy;
-    protected int dirtiness;
-    protected int boredom;
-    protected int hunger;
+    protected int dirtiness = 4;
+    protected int boredom = 5;
+    protected int hunger = 3;
+    protected boolean sleeping = false;
 
     private static final long serialVersionUID = 10L;
 
@@ -51,26 +52,27 @@ public abstract class Pet implements Serializable {
             System.out.println("I am not hungry :P");}
         else {
             if (favoriteFood == food) {
-                boredom += 1;
+                hunger -= food.energy;
+                boredom -= 1;
                 checkRange();
             } else {
+                hunger -= food.energy;
                 checkRange();
             }
-            dirtiness -= 2;
+            dirtiness += 2;
             checkRange();
         }
     }
 
     public void clean(String cleaning){
-        if(dirtiness == 10){
+        if(dirtiness == 0){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(name +" is clean enough.");
         }
         else {
-            dirtiness += 3;
+            dirtiness -= 3;
             checkRange();
         }
-
     }
 
     public void play(Toy toy) {
@@ -167,6 +169,7 @@ public abstract class Pet implements Serializable {
         System.out.println("*********************************************");
         System.out.println("Name: " + name + "\t Age: " + computeAge().days_ + "D " + computeAge().hours_ + "H "+ computeAge().minutes_ + "M" + "\t Stage: " + computeStage());
         System.out.println("Hunger: " + hunger + "\t Dirtiness: " + dirtiness + "\t Boredom: " + boredom);
+        if(sleeping){System.out.println(name + " is asleep.");};
         System.out.println("*********************************************");
     }
 
