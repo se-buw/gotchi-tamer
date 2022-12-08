@@ -266,10 +266,5 @@ class TestTime {
 		assertEquals(5, time1.days_);
 		assertEquals(12, time1.hours_);
 		assertEquals(55, time1.minutes_);
-
-		Time time2 = new Time(1, 25, 61);
-		assertEquals(2, time2.days_);
-		assertEquals(2, time2.hours_);
-		assertEquals(1, time2.minutes_);
 	}
 }
