@@ -118,16 +118,7 @@ class GameTest {
 		Game.startGame(dog);
 		assertEquals(10,dog.dirtiness);
 	}
-	@Test
-	void OverridePetTest() throws IOException, ClassNotFoundException {
-		String name = "OverridePetTest";
-		System.setIn(new ByteArrayInputStream(("cat\n" + name + "\n").getBytes()));
-		Game.startNewGame();
-		System.setIn(new ByteArrayInputStream(("dog\n" + name + "\n").getBytes()));
-		Game.startNewGame();
-		Pet survivor = Game.read_file(name);
-		assertEquals("steak",survivor.favoriteFood.name);
-	}
+
 	@Test
 	void readwriteFileTest() throws IOException, ClassNotFoundException {
 		String name = "readwriteFileTest";
