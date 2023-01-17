@@ -10,6 +10,7 @@ public abstract class Pet {
     protected Time age_;
     public String[] toy = {"Bone", "Ball", "Tire", "Stick"};
     public String[] food = {"Mana", "Sheep", "Human"};
+    public String[] cleaning = {"Bath", "Toilet","Grooming"};
 
 
     public Pet(){
