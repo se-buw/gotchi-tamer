@@ -10,7 +10,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
 	@Test
-	void startNewAppelemental() throws IOException, ClassNotFoundException {
+	void startNewGameElemental() throws IOException, ClassNotFoundException {
 		String name = "TESTstartAppelemental";
 		System.setIn(new ByteArrayInputStream(("elemental\n"+name+"\n").getBytes()));
 		App.startNewGame();
@@ -19,7 +19,7 @@ class AppTest {
 		assertEquals("steak",pet.getFavoriteFood());
 	}
 	@Test
-	void startNewAppcat() throws IOException, ClassNotFoundException {
+	void startNewGame() throws IOException, ClassNotFoundException {
 		String name = "TESTstartAppcat";
 		System.setIn(new ByteArrayInputStream(("cat\n" + name + "\n").getBytes()));
 		App.startNewGame();
@@ -31,7 +31,7 @@ class AppTest {
 	@Test
 	void PlayAppCatFeedNormalFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\napple\nclose\n").getBytes()));
-		Pet cat = new Dragon("PlayAppCatFeedNormalFood");
+		Pet cat = new Dragon("PlayGameCatFeedNormalFood");
 		App.startGame(cat);
 
 		assertEquals(4,cat.hunger_);
@@ -44,9 +44,9 @@ class AppTest {
 		Pet cat = new Dragon("PlayAppCatFeedFavoriteFood");
 		App.startGame(cat);
 
-		assertEquals(1,cat.hunger);
-		assertEquals(4,cat.boredom);
-		assertEquals(7,cat.dirtiness);
+		assertEquals(1,cat.hunger_);
+		assertEquals(4,cat.attention_);
+		assertEquals(7,cat.hygiene_);
 	}
 	@Test
 	void PlayAppElementalFeedFavoriteFood() throws IOException {
