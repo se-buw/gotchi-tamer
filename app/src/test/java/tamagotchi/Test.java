@@ -110,9 +110,9 @@ class GameTest {
 		System.setIn(new ByteArrayInputStream(("clean\nbath\nclose\n").getBytes()));
 		Pet dog = new Dog("REVIVE");
 
-		dog.hunger = 10;
-		dog.boredom = 10;
-		dog.dirtiness = 10;
+		dog.hunger_ = 10;
+		dog.boredom_ = 10;
+		dog.dirtiness_ = 10;
 		dog.check_death();
 
 		Game.startGame(dog);
@@ -125,7 +125,7 @@ class GameTest {
 		Pet testdog = new Dog(name);
 		Game.write_file(testdog);
 		Pet pet = Game.read_file(name);
-		assertEquals(name,pet.name);
+		assertEquals(name,pet.name_);
 		assertEquals("steak",pet.favoriteFood.name);
 	}
 
