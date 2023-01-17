@@ -8,133 +8,133 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
-class GameTest {
+class AppTest {
 	@Test
-	void startNewGamedog() throws IOException, ClassNotFoundException {
-		String name = "TESTstartGamedog";
-		System.setIn(new ByteArrayInputStream(("dog\n"+name+"\n").getBytes()));
-		Game.startNewGame();
-		Pet pet = Game.read_file(name);
+	void startNewAppelemental() throws IOException, ClassNotFoundException {
+		String name = "TESTstartAppelemental";
+		System.setIn(new ByteArrayInputStream(("elemental\n"+name+"\n").getBytes()));
+		App.startNewGame();
+		Pet pet = App.loadGame(name);
 		assertEquals(name,pet.name_);
 		assertEquals("steak",pet.getFavoriteFood());
 	}
 	@Test
-	void startNewGamecat() throws IOException, ClassNotFoundException {
-		String name = "TESTstartGamecat";
+	void startNewAppcat() throws IOException, ClassNotFoundException {
+		String name = "TESTstartAppcat";
 		System.setIn(new ByteArrayInputStream(("cat\n" + name + "\n").getBytes()));
-		Game.startNewGame();
-		Pet pet = Game.read_file(name);
+		App.startNewGame();
+		Pet pet = App.loadGame(name);
 		assertEquals(name,pet.name_);
-		assertEquals("tuna",pet.favoriteFood.name);
+		assertEquals("tuna",pet.getFavoriteFood());
 	}
 
 	@Test
-	void PlayGameCatFeedNormalFood() throws IOException {
+	void PlayAppCatFeedNormalFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\napple\nclose\n").getBytes()));
-		Pet cat = new Cat("PlayGameCatFeedNormalFood");
-		Game.startGame(cat);
+		Pet cat = new Dragon("PlayAppCatFeedNormalFood");
+		App.startGame(cat);
 
-		assertEquals(4,cat.hunger);
-		assertEquals(5,cat.boredom);
-		assertEquals(7,cat.dirtiness);
+		assertEquals(4,cat.hunger_);
+		assertEquals(5,cat.attention_);
+		assertEquals(7,cat.hygiene_);
 	}
 	@Test
-	void PlayGameCatFeedFavoriteFood() throws IOException {
+	void PlayAppCatFeedFavoriteFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\ntuna\nclose\n").getBytes()));
-		Pet cat = new Cat("PlayGameCatFeedFavoriteFood");
-		Game.startGame(cat);
+		Pet cat = new Dragon("PlayAppCatFeedFavoriteFood");
+		App.startGame(cat);
 
 		assertEquals(1,cat.hunger);
 		assertEquals(4,cat.boredom);
 		assertEquals(7,cat.dirtiness);
 	}
 	@Test
-	void PlayGameDogFeedFavoriteFood() throws IOException {
+	void PlayAppElementalFeedFavoriteFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\nsteak\nclose\n").getBytes()));
-		Pet dog = new Dog("PlayGameDogFeedFavoriteFood");
-		Game.startGame(dog);
+		Pet elemental = new Elemental("PlayAppElementalFeedFavoriteFood");
+		App.startApp(elemental);
 
-		assertEquals(1,dog.hunger);
-		assertEquals(4,dog.boredom);
-		assertEquals(7,dog.dirtiness);
+		assertEquals(1,elemental.hunger);
+		assertEquals(4,elemental.boredom);
+		assertEquals(7,elemental.dirtiness);
 	}
 	@Test
-	void PlayGameCatCleanToilet() throws IOException {
+	void PlayAppCatCleanToilet() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\ntoilet\nclose\n").getBytes()));
-		Pet cat = new Cat("PlayGameCatCleanToilet");
-		Game.startGame(cat);
+		Pet cat = new Cat("PlayAppCatCleanToilet");
+		App.startApp(cat);
 
 		assertEquals(2,cat.dirtiness);
 	}
 	@Test
-	void PlayGameCatCleanBath() throws IOException {
+	void PlayAppCatCleanBath() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\nbath\nclose\n").getBytes()));
-		Pet cat = new Cat("PlayGameCatCleanBath");
-		Game.startGame(cat);
+		Pet cat = new Cat("PlayAppCatCleanBath");
+		App.startApp(cat);
 
 		assertEquals(2,cat.dirtiness);
 	}
 	@Test
-	void PlayGameCatCleanGrooming() throws IOException {
+	void PlayAppCatCleanGrooming() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\ngrooming\nclose\n").getBytes()));
-		Pet cat = new Cat("PlayGameCatCleanGrooming");
-		Game.startGame(cat);
+		Pet cat = new Cat("PlayAppCatCleanGrooming");
+		App.startApp(cat);
 
 		assertEquals(2,cat.dirtiness);
 	}
 	@Test
-	void PlayGameCatCleanBack() throws IOException {
+	void PlayAppCatCleanBack() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\nback\nclose\n").getBytes()));
-		Pet cat = new Cat("PlayGameCatCleanBath");
-		Game.startGame(cat);
+		Pet cat = new Cat("PlayAppCatCleanBath");
+		App.startApp(cat);
 
 		assertEquals(5,cat.dirtiness);
 	}
 	@Test
-	void PlayGameDogSleepingClose() throws IOException {//TODO how do i do this
+	void PlayAppElementalSleepingClose() throws IOException {//TODO how do i do this
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\n").getBytes()));
-		Pet dog = new Dog("PlayGameDogSleepingClose");
-		//Game.startGame(dog);
+		Pet elemental = new Elemental("PlayAppElementalSleepingClose");
+		//App.startApp(elemental);
 	}
 
 	@Test
-	void PlayGameDogSleepingWakeUp() throws IOException {
+	void PlayAppElementalSleepingWakeUp() throws IOException {
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\nwake up\nclose\n").getBytes()));
-		Pet dog = new Dog("PlayGameDogSleepingWakeUp");
-		Game.startGame(dog);
-		assertEquals(3,dog.boredom);
-		assertEquals(6,dog.hunger);
+		Pet elemental = new Elemental("PlayAppElementalSleepingWakeUp");
+		App.startApp(elemental);
+		assertEquals(3,elemental.boredom);
+		assertEquals(6,elemental.hunger);
 	}
 	@Test
 	void REVIVE() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\nbath\nclose\n").getBytes()));
-		Pet dog = new Dog("REVIVE");
+		Pet elemental = new Elemental("REVIVE");
 
-		dog.hunger_ = 10;
-		dog.boredom_ = 10;
-		dog.dirtiness_ = 10;
-		dog.check_death();
+		elemental.hunger_ = 10;
+		elemental.boredom_ = 10;
+		elemental.dirtiness_ = 10;
+		elemental.check_death();
 
-		Game.startGame(dog);
-		assertEquals(10,dog.dirtiness);
+		App.startApp(elemental);
+		assertEquals(10,elemental.dirtiness);
 	}
 
 	@Test
 	void readwriteFileTest() throws IOException, ClassNotFoundException {
 		String name = "readwriteFileTest";
-		Pet testdog = new Dog(name);
-		Game.write_file(testdog);
-		Pet pet = Game.read_file(name);
+		Pet testelemental = new Elemental(name);
+		App.write_file(testelemental);
+		Pet pet = App.read_file(name);
 		assertEquals(name,pet.name_);
 		assertEquals("steak",pet.favoriteFood.name);
 	}
 
 	@Test
-	void PlayGameDogSleepingBack() throws IOException {
+	void PlayAppElementalSleepingBack() throws IOException {
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\nback\nclose\nwake up\nyes\nclose\n").getBytes()));
-		Pet dog = new Dog("PlayGameDogSleepingBack");
-		throw new org.opentest4j.AssertionFailedError(" Game is in infinite loop. this line can be removed, when problem is resolved");
-		//Game.startGame(dog); // this statement creates infinite loop
+		Pet elemental = new Elemental("PlayAppElementalSleepingBack");
+		throw new org.opentest4j.AssertionFailedError(" App is in infinite loop. this line can be removed, when problem is resolved");
+		//App.startApp(elemental); // this statement creates infinite loop
 	}
 }
 class FoodTest {
@@ -208,14 +208,14 @@ class TestToy {
 
 class TestPet {
 	@Test
-	void TestDog(){
-		Dog dog = new Dog("doggg");
-		assertEquals("doggg", dog.name);
-		assertEquals(new Steak().name, dog.favoriteFood.name);
-		assertEquals(new Ball().name, dog.favoriteToy.name);
-		assertEquals(5, dog.hunger);
-		assertEquals(5, dog.boredom);
-		assertEquals(5, dog.dirtiness);
+	void TestElemental(){
+		Elemental elemental = new Elemental("elemental");
+		assertEquals("elemental", elemental.name);
+		assertEquals(new Steak().name, elemental.favoriteFood.name);
+		assertEquals(new Ball().name, elemental.favoriteToy.name);
+		assertEquals(5, elemental.hunger);
+		assertEquals(5, elemental.boredom);
+		assertEquals(5, elemental.dirtiness);
 	}
 	@Test
 	void TestCat(){

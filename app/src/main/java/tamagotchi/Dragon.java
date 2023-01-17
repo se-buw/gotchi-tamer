@@ -44,4 +44,6 @@ class Dragon extends Pet {
         this.favorite_food_ = fav_food;
         this.favorite_toy_ = fav_toy;
     }
+
+
 }
