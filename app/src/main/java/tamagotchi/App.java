@@ -52,7 +52,7 @@ public class App {
             pet = new Elemental("elemental", name, sex);
         }
 		else {
-            pet = new Cat("dragon", name, sex);
+            pet = new Dragon("dragon", name, sex);
         }
         FileOrganizer file = new FileOrganizer();
         file.create_file(pet);
@@ -98,6 +98,7 @@ public class App {
                     System.out.println("What do you want to clean for " + pet.get_name() + "?");
                     System.out.println("bath \t toilet \t grooming \t back");
                     input = sr.nextLine().toLowerCase();
+                    back = false;
                     do {
                         switch (input) {
                             case "bath" -> {
@@ -190,8 +191,8 @@ public class App {
 					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
 					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
-		if (attributes[0].equals("cat")){
-			pet = new Cat(attributes[0], attributes[1], attributes[2],
+		if (attributes[0].equals("dragon")){
+			pet = new Dragon(attributes[0], attributes[1], attributes[2],
 					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
 					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
@@ -210,6 +211,10 @@ public class App {
     public static void displayChoices(){
         System.out.println("Interactions with the pet:");
         System.out.println("feed \t clean \t play \t save \t close");
+    }
+
+    public static void displayStats(){
+
     }
 
     public static void main(String[] args) throws IOException {

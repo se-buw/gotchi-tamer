@@ -15,8 +15,8 @@ class GameTest {
 		System.setIn(new ByteArrayInputStream(("dog\n"+name+"\n").getBytes()));
 		Game.startNewGame();
 		Pet pet = Game.read_file(name);
-		assertEquals(name,pet.name);
-		assertEquals("steak",pet.favoriteFood.name);
+		assertEquals(name,pet.name_);
+		assertEquals("steak",pet.getFavoriteFood());
 	}
 	@Test
 	void startNewGamecat() throws IOException, ClassNotFoundException {
@@ -24,7 +24,7 @@ class GameTest {
 		System.setIn(new ByteArrayInputStream(("cat\n" + name + "\n").getBytes()));
 		Game.startNewGame();
 		Pet pet = Game.read_file(name);
-		assertEquals(name,pet.name);
+		assertEquals(name,pet.name_);
 		assertEquals("tuna",pet.favoriteFood.name);
 	}
 
