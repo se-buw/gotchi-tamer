@@ -96,41 +96,29 @@ public class App {
                 }
                 case "clean" -> {
                     System.out.println("What do you want to clean for " + pet.get_name() + "?");
-                    System.out.println("bath \t toilet \t grooming \t back");
+                    for (String cleaning : pet.cleaning){
+                        System.out.print(cleaning + "\t");
+                    }
+                    System.out.println(" back");
                     input = sr.nextLine().toLowerCase();
-                    back = false;
                     do {
-                        switch (input) {
-                            case "bath" -> {
-                                pet.clean("bath");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "toilet" -> {
-                                pet.clean("toilet");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "grooming" -> {
-                                pet.clean("grooming");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "back" -> {
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            default -> {
-                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                System.out.println("Thawt iws nowt a vawid command!");
-                                System.out.println("Please select from the listed clean activities above!");
-                                input = sr.nextLine().toLowerCase();
-                            }
+                    for (String cleaning : pet.cleaning){
+                        if (input.equals(cleaning)){
+                            pet.clean(cleaning);
+                            back = true;
+                            pet.getInformation();
+                            displayChoices();
+                        } else if (input.equals("back")){
+                            back = true;
+                            pet.getInformation();
+                            displayChoices();
+                        }else {
+                            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                            System.out.println("Thawt iws nowt a vawid command!");
+                            System.out.println("Pwease sewect fwom the wisted cwean activities above!");
+                            input = sr.nextLine().toLowerCase();
                         }
+                    }
                     } while (!back);
                 }
                 case "play" -> {
@@ -145,8 +133,12 @@ public class App {
                         if (input.equals(toy)) {
                             pet.play(toy);
                             back = true;
+                            pet.getInformation();
+                            displayChoices();
                         } else if (input.equals("back")) {
                             back = true;
+                            pet.getInformation();
+                            displayChoices();
                         } else {
                             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                             System.out.println("Thawt iws nowt a vawid command!");
@@ -154,8 +146,6 @@ public class App {
                             input = sr.nextLine().toLowerCase();
                         }
                     }
-                    pet.getInformation();
-                    displayChoices();
                     } while (!back);
                 }
                 case "save" -> {
