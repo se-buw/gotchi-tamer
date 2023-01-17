@@ -6,48 +6,57 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public class App {
     public static String startNewGame(){
-        String[] pets = {"dog", "cat"};
+        String[] pets = {"elemental", "dragon"};
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println("Welcome to Tamagotchi.");
-        System.out.println("In Tamagotchi you can create your own digital pet. The rule is easy, keep your pet alive!");
-        System.out.println("That means simply, you have to take care of your pet");
-        System.out.println("First, choose what kind of pet you want:");
+        System.out.println("Wewcome tuwu tamagotchi.");
+        System.out.println("In tamagotchi uwu cawn cweate youw own digitaw pet. The wuwe iws easy, keep youw pet awive!");
+        System.out.println("Thawt means simpwy, uwu have tuwu take cawe of youw pet.");
+        System.out.println("Fiwst, choose whawt kind of pet uwu wawnt:");
         // listing what kinds of pets are available
-        System.out.println("You can choose between dog or cat!");
+        System.out.println("Uwu cawn choose between an ewementaw ow a dwagon!");
         Scanner input = new Scanner(System.in);
         String selectedPet = input.nextLine();
 
         while (!selectedPet.equals(pets[0]) && !selectedPet.equals(pets[1])){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println("You can only choose from the listed pets above!");
+            System.out.println("Uwu cawn onwy choose fwom the wisted pets above!");
             selectedPet = input.nextLine().toLowerCase();
         }
         System.out.println("What is the name of your " + selectedPet + "?");
         String name = input.nextLine();
-        System.out.println("Which gender should your " + selectedPet + " have?");
-        System.out.println("You can choose between male and female.");
+        System.out.println("Which secks should your " + selectedPet + " have?");
+        System.out.println("UwU cawn choose between mawe awnd femawe ow a wandom secks.");
         String sex = input.nextLine().toLowerCase();
-        while(!sex.equals("male") && !sex.equals("female")){
+
+        while(!sex.equals("male") && !sex.equals("female") && !sex.equals("random")){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println("Please write male or female.");
+            System.out.println("Pwease wwite mawe ow femawe ow wandom.");
             sex = input.nextLine().toLowerCase();
         }
-
-        if (selectedPet.equals("dog")){
-            Pet pet = new Dog("dog",name, sex);
-            FileOrganizer file = new FileOrganizer();
-            file.create_file(pet);
-            file.write_file(pet);
+        //
+        if (sex.equals("random")){
+            Random r = new Random();
+            int number = r.nextInt(100);
+            if (number <50){
+                sex = "male";
+            }else {
+                sex = "female";
+            }
         }
-		else if (selectedPet.equals("cat")){
-			Pet pet = new Cat("cat", name, sex);
-			FileOrganizer file = new FileOrganizer();
-			file.create_file(pet);
-			file.write_file(pet);
-		}
+        Pet pet;
+        if (selectedPet.equals("elemental")){
+            pet = new Elemental("elemental", name, sex);
+        }
+		else {
+            pet = new Cat("dragon", name, sex);
+        }
+        FileOrganizer file = new FileOrganizer();
+        file.create_file(pet);
+        file.write_file(pet);
         return name;
     }
     public static void startGame(Pet pet){
@@ -62,47 +71,33 @@ public class App {
             switch (input) {
                 case "feed" -> {
                     System.out.println("What do you want to feed " + pet.get_name() + "?");
-                    System.out.println("apple \t bread \t steak \t back");
+                    for (String food: pet.food) {
+                        System.out.print(food +"\t");
+                    }
+                    System.out.println(" back");
                     input = sr.nextLine().toLowerCase();
-                    do {
-                        switch (input) {
-                            case "apple" -> {
-                                pet.feed("apple");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "bread" -> {
-                                pet.feed("bread");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "steak" -> {
-                                pet.feed("steak");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "back" -> {
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            default -> {
-                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                System.out.println("That is not a valid command!");
-                                System.out.println("Please select from the listed food above!");
-                                input = sr.nextLine().toLowerCase();
-                            }
+                    do{
+                    for (String food : pet.food) {
+                        if (input.equals(food)) {
+                            pet.feed(food);
+                            back = true;
+                        } else if (input.equals("back")) {
+                            back = true;
+                        } else {
+                            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                            System.out.println("Thawt iws nowt a vawid command!");
+                            System.out.println("Pwease sewect fwom the wisted food above!");
+                            input = sr.nextLine().toLowerCase();
                         }
+                    }
+                    pet.getInformation();
+                    displayChoices();
                     } while (!back);
                 }
                 case "clean" -> {
                     System.out.println("What do you want to clean for " + pet.get_name() + "?");
                     System.out.println("bath \t toilet \t grooming \t back");
                     input = sr.nextLine().toLowerCase();
-                    back = false;
                     do {
                         switch (input) {
                             case "bath" -> {
@@ -130,7 +125,7 @@ public class App {
                             }
                             default -> {
                                 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                System.out.println("That is not a valid command!");
+                                System.out.println("Thawt iws nowt a vawid command!");
                                 System.out.println("Please select from the listed clean activities above!");
                                 input = sr.nextLine().toLowerCase();
                             }
@@ -139,41 +134,27 @@ public class App {
                 }
                 case "play" -> {
                     System.out.println("What do you want to play with " + pet.get_name() + "?");
-                    System.out.println("ball \t stick \t yarn \t back");
+                    for (String toy : pet.toy){
+                        System.out.print(toy +"\t");
+                    }
+                    System.out.println(" back");
                     input = sr.nextLine().toLowerCase();
-                    back = false;
-                    do {
-                        switch (input) {
-                            case "ball" -> {
-                                pet.play("ball");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "stick" -> {
-                                pet.play("stick");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "yarn" -> {
-                                pet.play("yarn");
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            case "back" -> {
-                                back = true;
-                                pet.getInformation();
-                                displayChoices();
-                            }
-                            default -> {
-                                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                System.out.println("That is not a valid command!");
-                                System.out.println("Please select from the listed toys above!");
-                                input = sr.nextLine().toLowerCase();
-                            }
+                    do{
+                    for (String toy: pet.toy) {
+                        if (input.equals(toy)) {
+                            pet.play(toy);
+                            back = true;
+                        } else if (input.equals("back")) {
+                            back = true;
+                        } else {
+                            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                            System.out.println("Thawt iws nowt a vawid command!");
+                            System.out.println("Pwease sewect fwom the wisted toys above!");
+                            input = sr.nextLine().toLowerCase();
                         }
+                    }
+                    pet.getInformation();
+                    displayChoices();
                     } while (!back);
                 }
                 case "save" -> {
@@ -187,7 +168,7 @@ public class App {
                 }
                 default -> {
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                    System.out.println("That is not a valid command!");
+                    System.out.println("Thawt iws nowt a vawid command!");
                 }
             }
         } while (!close);
@@ -197,15 +178,15 @@ public class App {
     public static Pet loadGame(String name) throws IOException{
         FileOrganizer file = new FileOrganizer();
         String[] attributes = file.load_file(name);
-        Pet none = new Dog();
+        Pet none = new Elemental();
         if (attributes.length == 0){
             return none;
         }
-        Pet pet = new Dog();
+        Pet pet = new Elemental();
         long timePast = Duration.between(LocalDateTime.parse(attributes[9]), LocalDateTime.now()).toHours();
         int i = (int)timePast;
-        if (attributes[0].equals("dog")){
-			pet = new Dog(attributes[0], attributes[1], attributes[2],
+        if (attributes[0].equals("elemental")){
+			pet = new Elemental(attributes[0], attributes[1], attributes[2],
 					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
 					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
@@ -231,10 +212,6 @@ public class App {
         System.out.println("feed \t clean \t play \t save \t close");
     }
 
-    public static void displayStats(){
-
-    }
-
     public static void main(String[] args) throws IOException {
         boolean quit = false;
         do {
@@ -244,33 +221,36 @@ public class App {
             System.out.println("Choices: load \t create \t quit");
             Scanner scanner = new Scanner(System.in);
             String command = scanner.nextLine().toLowerCase();
-            if (command.equals("create")) {
-                String petName = startNewGame();
-                Pet pet = loadGame(petName);
-                if (pet.get_name().equals("None")) {
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                    System.out.println("Something went wrong! Please try again!");
-                } else {
-                    startGame(pet);
-                    quit = true;
+            switch (command) {
+                case "create" -> {
+                    String petName = startNewGame();
+                    Pet pet = loadGame(petName);
+                    if (pet.get_name().equals("None")) {
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        System.out.println("Something went wrong! Please try again!");
+                    } else {
+                        startGame(pet);
+                        quit = true;
+                    }
+                    break;
                 }
-            } else if (command.equals("load")) {
-                System.out.println("What is the name of the pet you want to interact with?");
-                command = scanner.nextLine().toLowerCase();
-                Pet pet = loadGame(command);
-                if (pet.get_name().equals("None")) {
-                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                } else {
-                    startGame(pet);
-                    quit = true;
+                case "load" -> {
+                    System.out.println("What is the name of the pet you want to interact with?");
+                    command = scanner.nextLine().toLowerCase();
+                    Pet pet = loadGame(command);
+                    if (pet.get_name().equals("None")) {
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    } else {
+                        startGame(pet);
+                        quit = true;
+                    }
+                    break;
                 }
-            }
-            else if(command.equals("quit")) {
-                quit = true;
-            }
-            else {
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                System.out.println("That is not a valid choice!");
+                case "quit" -> quit = true;
+                default -> {
+                    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    System.out.println("That is not a valid choice!");
+                }
             }
         }while (!quit);
     }

@@ -3,19 +3,21 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public abstract class Pet {
-    protected String name_, sex_, stage_ = "Baby";
+    protected String name_, sex_, stage_ = "Bébé";
     protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
     protected int health_ = hunger_ + hygiene_ + attention_;
     protected LocalDateTime birthday_, lastLogout_;
     protected Time age_;
+    public String[] toy = {"Bone", "Ball", "Tire", "Stick"};
+    public String[] food = {"Mana", "Sheep", "Human"};
+
 
     public Pet(){
         name_ = "None";
         sex_ = "None";
     }
     private LocalDateTime stringToLocalDateTime(String str){
-        LocalDateTime dateTime = LocalDateTime.parse(str);
-        return dateTime;
+        return LocalDateTime.parse(str);
     }
 
     public Pet(String name, String sex){
@@ -110,7 +112,7 @@ public abstract class Pet {
     public void feed(String favorite){
         if (hunger_ == 10){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println(name_ +" is not hungry.");}
+            System.out.println(name_ +" is not hungwy. TT ");}
         else {
             if (getFavoriteFood().equals(favorite)) {
                 hunger_ += 5;
@@ -128,7 +130,7 @@ public abstract class Pet {
     public void clean(String cleaning){
         if(hygiene_ == 10){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println(name_ +" is clean enough.");
+            System.out.println(name_ +" is cwean ewough. UwU");
         }
         else {
             hygiene_ += 3;
@@ -141,7 +143,7 @@ public abstract class Pet {
 
         if (attention_ == 10){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println(name_ +" doesn't want to play with you anymore.");}
+            System.out.println(name_ +" doesn't want to pway with you anymowre.");}
         else {
             if (getFavoriteToy().equals(favorite)) {
                 attention_ += 5;
@@ -159,7 +161,7 @@ public abstract class Pet {
     void getInformation(){
         System.out.println("*********************************************");
         setAge();
-        System.out.println("Name: " + name_ + "\t Sex: " + sex_ + "\t Age: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" + "\t Stage: " + stage_);
+        System.out.println("Name: " + name_ + "\t Secks: " + sex_ + "\t OwO: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" + "\t Stage: " + stage_);
         System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health_);
         System.out.println("*********************************************");
     }
