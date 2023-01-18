@@ -15,22 +15,14 @@ class Dragon extends Pet {
     }
 
     public String getType(){ return type_;}
-    @Override
-    public String randomFavFood(){
-        String[] food = {"Apple", "Bread", "Steak"};
-        Random random_number = new Random();
-        String fav_food = food[Math.abs(random_number.nextInt()) % food.length];
-        return fav_food;
-    }
-    @Override
-    public String randomFavToy(){
-        String[] toy = {"Bone", "Ball", "Tire", "Stick"};
-        Random random_number = new Random();
-        String fav_toy = toy[Math.abs(random_number.nextInt()) % toy.length];
-        return fav_toy;
-    }
     Dragon(){
         super();
+    }
+    public Dragon(String name){
+        String sex = "male";
+        type_ = "dragon";
+        favorite_food_ = randomFavFood();
+        favorite_toy_ = randomFavToy();
     }
     public Dragon(String type, String name, String sex){
         super(name, sex);

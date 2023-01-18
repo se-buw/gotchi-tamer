@@ -1,6 +1,7 @@
 package tamagotchi;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public abstract class Pet {
     protected String name_, sex_, stage_ = "Bébé";
@@ -40,8 +41,14 @@ public abstract class Pet {
 
     public abstract String getType();
 
-    abstract String randomFavFood();
-    abstract String randomFavToy();
+    public String randomFavFood(){
+        Random random_number = new Random();
+        return food[random_number.nextInt(food.length)];
+    }
+    String randomFavToy(){
+        Random random_number = new Random();
+        return toy[random_number.nextInt(toy.length)];
+    }
 
     abstract String getFavoriteFood();
 

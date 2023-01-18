@@ -15,16 +15,6 @@ class Elemental extends Pet {
     }
 
     public String getType(){ return type_;}
-    @Override
-    public String randomFavFood(){
-        Random random_number = new Random();
-        return food[random_number.nextInt(food.length)];
-    }
-    @Override
-    public String randomFavToy(){
-        Random random_number = new Random();
-        return toy[random_number.nextInt(toy.length)];
-    }
     Elemental(){
         super();
     }
