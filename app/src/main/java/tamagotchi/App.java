@@ -1,10 +1,10 @@
 // our program starts here
 
 package tamagotchi;
+import java.io.*;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -35,7 +35,7 @@ public class App {
 
         System.out.println("Whawt iws the nawme of youw" + selectedPet + "?");
         String name = input.nextLine();
-        System.out.println("Which secks shouwd youw" + selectedPet + " have?");
+        System.out.println("Which seggs shouwd youw " + selectedPet + " have?");
         System.out.println("UwU cawn choose between mawe awnd femawe ow a wandom secks.");
         String sex = input.nextLine().toLowerCase();
 
@@ -172,7 +172,6 @@ public class App {
         } while (!close);
     }
 
-
     public static Pet loadGame(String name) throws IOException{
         FileOrganizer file = new FileOrganizer();
         String[] attributes = file.load_file(name);
@@ -182,18 +181,18 @@ public class App {
         }
         Pet pet = new Elemental();
         long timePast = Duration.between(LocalDateTime.parse(attributes[9]), LocalDateTime.now()).toHours();
-        int i = (int)timePast;
+        float i = (float)timePast;
         if (attributes[0].equals("elemental")){
 			pet = new Elemental(attributes[0], attributes[1], attributes[2],
-					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
-					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
+					Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4])-i,
+					Float.parseFloat(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
 		if (attributes[0].equals("dragon")){
 			pet = new Dragon(attributes[0], attributes[1], attributes[2],
-					Integer.parseInt(attributes[3])-i, Integer.parseInt(attributes[4])-i,
-					Integer.parseInt(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
+					Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4])-i,
+					Float.parseFloat(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
-        if((pet.hunger_ + pet.attention_ + pet.hygiene_ ) == 0){
+        if(pet.check_death()){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(pet.name_ + " died!");
             System.out.println(pet.name_ + " R.I.P");
@@ -202,16 +201,11 @@ public class App {
             return none;
         }
         return pet;
-
     }
     // Todo
     public static void displayChoices(){
-        System.out.println("Interactions with the pet:");
-        System.out.println("feed \t clean \t play \t save \t close");
-    }
-
-    public static void displayStats(){
-
+        System.out.println("W-what do i want tu do wif the pet uwu?");
+        System.out.println("feed \t cwean \t pway \t save \t cwose");
     }
 
     public static void main(String[] args) throws IOException {
@@ -229,12 +223,11 @@ public class App {
                     Pet pet = loadGame(petName);
                     if (pet.get_name().equals("")) {
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        System.out.println("Something went wong! pwease twy again!");
+                        System.out.println("Something went wong!OwO pwease twy again =w=");
                     } else {
                         startGame(pet);
                         quit = true;
                     }
-                    break;
                 }
                 case "load" -> {
                     System.out.println("Whawt iws the nawme of the pet uwu wawnt tuwu intewact with?");
@@ -254,6 +247,37 @@ public class App {
                 }
             }
         }while (!quit);
+    }
+
+    static void write_file(Pet pet) throws IOException {
+        //change the path
+        File file = new File(pet.name_ + ".txt");
+        String filepath = file.getAbsolutePath();
+        try {
+
+            FileOutputStream fileOut = new FileOutputStream(filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(pet);
+            objectOut.close();
+            //System.out.println("The Object  was successfully written to a file");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+    }
+    static Pet read_file(String nameOfPet) throws IOException, ClassNotFoundException {
+
+        FileInputStream fi = new FileInputStream(nameOfPet + ".txt");
+        ObjectInputStream oi = new ObjectInputStream(fi);
+
+        // Read objects
+        Pet pet = (Pet) oi.readObject();
+
+        oi.close();
+        fi.close();
+
+        return pet;
     }
 
 }
