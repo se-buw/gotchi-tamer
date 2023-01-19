@@ -30,7 +30,7 @@ public class FileOrganizer {
     public void read_file(){
         try {
             File myObj = new File("tamagotchi.txt");
-            //File myObj = new File("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -46,7 +46,7 @@ public class FileOrganizer {
     public void write_file(Pet pet){
         try {
             FileWriter myWriter = new FileWriter(pet.get_name()+".txt");
-            //FileWriter myWriter = new FileWriter("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
+
             myWriter.write(pet.getType() +"\n");
             myWriter.write(pet.name_ + "\n");
             myWriter.write(pet.sex_ + "\n");
