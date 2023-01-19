@@ -3,7 +3,6 @@
 package tamagotchi;
 import java.io.*;
 import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -33,7 +32,7 @@ public class App {
             selectedPet = "ewementaw";
         }
 
-        System.out.println("Whawt iws the nawme of youw" + selectedPet + "?");
+        System.out.println("Whawt iws the nawme of youw " + selectedPet + "?");
         String name = input.nextLine();
         System.out.println("Which seggs shouwd youw " + selectedPet + " have?");
         System.out.println("UwU cawn choose between mawe awnd femawe ow a wandom secks.");
@@ -66,7 +65,19 @@ public class App {
         file.write_file(pet);
         return name;
     }
+    public static void death(Pet pet){
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(pet.name_ + " died!");
+        System.out.println("R.I.P "+pet.name_);
+        System.out.println("Uwu awe a tewwibwe ownew!!");
+        System.out.println("(◞‸◟) (◞‸◟)");
+        pet.dead = true;
+    }
     public static void startGame(Pet pet){
+        if (pet.check_death()){
+            death(pet);
+            return;
+        }
         pet.getInformation();
         displayChoices();
         Scanner sr = new Scanner(System.in);
@@ -155,6 +166,12 @@ public class App {
                     }
                     } while (!back);
                 }
+                case "sleep" -> {
+                    pet.sleeping = true;
+                    System.out.println(pet.name_+" is now sweeping. ZZzzz");
+                    file.write_file(pet);
+                    close = true;
+                }
                 case "save" -> {
                     file.write_file(pet);
                     pet.getInformation();
@@ -175,37 +192,38 @@ public class App {
     public static Pet loadGame(String name) throws IOException{
         FileOrganizer file = new FileOrganizer();
         String[] attributes = file.load_file(name);
-        Pet none = new Elemental();
-        if (attributes.length == 0){
-            return none;
-        }
         Pet pet = new Elemental();
         long timePast = Duration.between(LocalDateTime.parse(attributes[9]), LocalDateTime.now()).toHours();
         float i = (float)timePast;
-        if (attributes[0].equals("elemental")){
+        if (attributes[0].equals("elemental")&& !pet.sleeping){
 			pet = new Elemental(attributes[0], attributes[1], attributes[2],
 					Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4])-i,
 					Float.parseFloat(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
 		}
-		if (attributes[0].equals("dragon")){
+        else if (attributes[0].equals("elemental")){
+            pet = new Elemental(attributes[0], attributes[1], attributes[2],
+                    Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4]),
+                    Float.parseFloat(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
+            pet.sleeping = true;
+        }
+		else if (attributes[0].equals("dragon")&& !pet.sleeping){
 			pet = new Dragon(attributes[0], attributes[1], attributes[2],
 					Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4])-i,
 					Float.parseFloat(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
-		}
+		}else if (attributes[0].equals("dragon")){
+            pet = new Dragon(attributes[0], attributes[1], attributes[2],
+                    Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4]),
+                    Float.parseFloat(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
+            pet.sleeping = true;
+        }
         if(pet.check_death()){
-            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println(pet.name_ + " died!");
-            System.out.println(pet.name_ + " R.I.P");
-            System.out.println("Uwu awe a tewwibwe ownew!!");
-            System.out.println("(◞‸◟) (◞‸◟)");
-            return none;
+            death(pet);
         }
         return pet;
     }
-    // Todo
     public static void displayChoices(){
         System.out.println("W-what do i want tu do wif the pet uwu?");
-        System.out.println("feed \t cwean \t pway \t save \t cwose");
+        System.out.println("feed \t cwean \t pway \t sweep \t save \t cwose");
     }
 
     public static void main(String[] args) throws IOException {
@@ -233,6 +251,7 @@ public class App {
                     System.out.println("Whawt iws the nawme of the pet uwu wawnt tuwu intewact with?");
                     command = scanner.nextLine().toLowerCase();
                     Pet pet = loadGame(command);
+                    if (pet.dead){quit=true;break;}
                     if (pet.get_name().equals("")) {
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     } else {

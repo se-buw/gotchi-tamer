@@ -5,13 +5,15 @@ import java.util.Random;
 
 public abstract class Pet {
     protected String name_, sex_, stage_ = "Bébé";
-    protected float hunger_ = 10.0f, hygiene_ = 10.0f, attention_ = 10.0f;
+    protected float hunger_ = 8.0f, hygiene_ = 8.0f, attention_ = 8.0f;
     protected float health_ = (hunger_+ hygiene_+attention_)/3;
     protected LocalDateTime birthday_, lastLogout_;
     protected Time age_;
-    public String[] toy = {"Bone", "Ball", "Yarn", "Stick"};
-    public String[] food = {"Apple", "Bread", "Steak"};
-    public String[] cleaning = {"Bath", "Toilet","Grooming"};
+    public boolean dead = false;
+    public boolean sleeping = false;
+    public String[] toy = {"bone", "ball", "yarn", "stick"};
+    public String[] food = {"apple", "bread", "steak"};
+    public String[] cleaning = {"bath", "toilet","grooming"};
 
 
     public Pet(){
@@ -128,6 +130,7 @@ public abstract class Pet {
             if (getFavoriteFood().equals(favorite)) {
                 hunger_ += 5;
                 attention_ += 1;
+                System.out.println(name_+" woved this food, this might be its favowite food uwu.");
             } else {
                 hunger_ += 3;
             }
@@ -155,6 +158,7 @@ public abstract class Pet {
         else {
             if (getFavoriteToy().equals(currentToy)) {
                 attention_ += 5;
+                System.out.println(name_+" woved to pway wif this toy. it might be its favowite uwu.");
             } else {
                 attention_ += 3;
             }
