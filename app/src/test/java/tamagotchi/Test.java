@@ -10,7 +10,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
 	@Test
-	void startNewAppelemental() throws IOException, ClassNotFoundException {
+	void startNewGameElemental() throws IOException, ClassNotFoundException {
 		String name = "TESTstartAppelemental";
 		System.setIn(new ByteArrayInputStream(("elemental\n"+name+"\n").getBytes()));
 		App.startNewGame();
@@ -19,7 +19,7 @@ class AppTest {
 		assertEquals("steak",pet.getFavoriteFood());
 	}
 	@Test
-	void startNewAppcat() throws IOException, ClassNotFoundException {
+	void startNewGame() throws IOException, ClassNotFoundException {
 		String name = "TESTstartAppcat";
 		System.setIn(new ByteArrayInputStream(("cat\n" + name + "\n").getBytes()));
 		App.startNewGame();
