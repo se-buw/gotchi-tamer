@@ -33,7 +33,8 @@ class Dragon extends Pet {
         super();
     }
     public Dragon(String name){
-        super(name, "female");
+        String sex = "male";
+        type_ = "dragon";
         favorite_food_ = randomFavFood();
         favorite_toy_ = randomFavToy();
     }
