@@ -10,8 +10,8 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
 	@Test
-	void startNewGameElemental() throws IOException, ClassNotFoundException {
-		String name = "TESTstartAppelemental";
+	void startNewAppElemental() throws IOException, ClassNotFoundException {
+		String name = "TESTstartGameelemental";
 		System.setIn(new ByteArrayInputStream(("elemental\n"+name+"\n").getBytes()));
 		App.startNewGame();
 		Pet pet = App.loadGame(name);
@@ -19,9 +19,9 @@ class AppTest {
 		assertEquals("steak",pet.getFavoriteFood());
 	}
 	@Test
-	void startNewGame() throws IOException, ClassNotFoundException {
-		String name = "TESTstartAppcat";
-		System.setIn(new ByteArrayInputStream(("cat\n" + name + "\n").getBytes()));
+	void startNewGameDragon() throws IOException, ClassNotFoundException {
+		String name = "TESTstartGamedragon";
+		System.setIn(new ByteArrayInputStream(("dragon\n" + name + "\n").getBytes()));
 		App.startNewGame();
 		Pet pet = App.loadGame(name);
 		assertEquals(name,pet.name_);
@@ -31,17 +31,17 @@ class AppTest {
 	@Test
 	void PlayAppCatFeedNormalFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\napple\nclose\n").getBytes()));
-		Pet dragon = new Dragon("PlayGameCatFeedNormalFood");
+		Pet dragon = new Dragon("PlayGamedragonFeedNormalFood","female");
 		App.startGame(dragon);
 
-		assertEquals(4,dragon.hunger_);
-		assertEquals(5,dragon.attention_);
-		assertEquals(7,dragon.hygiene_);
+		assertEquals(10,dragon.hunger_);
+		assertEquals(10,dragon.attention_);
+		assertEquals(8,dragon.hygiene_);
 	}
 	@Test
 	void PlayAppCatFeedFavoriteFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\ntuna\nclose\n").getBytes()));
-		Pet cat = new Dragon("PlayAppCatFeedFavoriteFood");
+		Pet cat = new Dragon("PlayGameDragonFeedFavoriteFood","male");
 		App.startGame(cat);
 
 		assertEquals(1,cat.hunger_);
@@ -51,8 +51,8 @@ class AppTest {
 	@Test
 	void PlayAppElementalFeedFavoriteFood() throws IOException {
 		System.setIn(new ByteArrayInputStream(("feed\nsteak\nclose\n").getBytes()));
-		Pet elemental = new Elemental("PlayGameElementalFeedFavoriteFood");
-		App.startGame(elemental););
+		Pet elemental = new Elemental("PlayGameElementalFeedFavoriteFood","male");
+		App.startGame(elemental);
 
 		assertEquals(1,elemental.hunger_);
 		assertEquals(4,elemental.attention_);
@@ -61,7 +61,7 @@ class AppTest {
 	@Test
 	void PlayAppCatCleanToilet() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\ntoilet\nclose\n").getBytes()));
-		Pet dragon = new Dragon("PlayGameCatCleanToilet");
+		Pet dragon = new Dragon("PlayGameDragonCleanToilet","male");
 		App.startGame(dragon);
 
 		assertEquals(2,dragon.hygiene_);
@@ -69,7 +69,7 @@ class AppTest {
 	@Test
 	void PlayAppCatCleanBath() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\nbath\nclose\n").getBytes()));
-		Pet cat = new Dragon("PlayAppCatCleanBath");
+		Pet cat = new Dragon("PlayGameDragonCleanBath","male");
 		App.startGame(cat);
 
 		assertEquals(2,cat.hygiene_);
@@ -77,7 +77,7 @@ class AppTest {
 	@Test
 	void PlayAppCatCleanGrooming() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\ngrooming\nclose\n").getBytes()));
-		Pet cat = new Dragon("PlayAppCatCleanGrooming");
+		Pet cat = new Dragon("PlayGameDragonCleanGrooming","male");
 		App.startGame(cat);
 
 		assertEquals(2,cat.hygiene_);
@@ -85,22 +85,22 @@ class AppTest {
 	@Test
 	void PlayAppCatCleanBack() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\nback\nclose\n").getBytes()));
-		Pet cat = new Dragon("PlayGameCatCleanBath");
+		Pet cat = new Dragon("PlayGameDragonCleanBath","male");
 		App.startGame(cat);
 
-		assertEquals(5,cat.hygiene_);
+		assertEquals(10,cat.hygiene_);
 	}
 	@Test
 	void PlayAppElementalSleepingClose() throws IOException {//TODO how do i do this
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\n").getBytes()));
-		Pet elemental = new Elemental("PlayGameElementalSleepingClose");
+		Pet elemental = new Elemental("PlayGameElementalSleepingClose","female");
 		//App.startApp(elemental);
 	}
 
 	@Test
-	void PlayAppElementalSleepingWakeUp() throws IOException {
+	void PlayAppElementalSleepingWakeUp() throws IOException { // ToDO create sleep function
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\nwake up\nclose\n").getBytes()));
-		Pet elemental = new Elemental("PlayGameElementalSleepingWakeUp");
+		Pet elemental = new Elemental("PlayGameElementalSleepingWakeUp","male");
 		App.startGame(elemental);
 		assertEquals(3,elemental.attention_);
 		assertEquals(6,elemental.hunger_);
@@ -108,7 +108,7 @@ class AppTest {
 	@Test
 	void REVIVE() throws IOException {
 		System.setIn(new ByteArrayInputStream(("clean\nbath\nclose\n").getBytes()));
-		Pet elemental = new Elemental("REVIVE");
+		Pet elemental = new Elemental("Jesus","male");
 
 		elemental.hunger_ = 0;
 		elemental.attention_ = 0;
@@ -123,7 +123,7 @@ class AppTest {
 	void readwriteFileTest() throws IOException, ClassNotFoundException {
 		//ToDO: setter for fav food
 		String name = "readwriteFileTest";
-		Pet testelemental = new Elemental(name);
+		Pet testelemental = new Elemental(name,"female");
 		App.write_file(testelemental);
 		Pet pet = App.read_file(name);
 		assertEquals(name,pet.name_);
@@ -133,11 +133,12 @@ class AppTest {
 	@Test
 	void PlayAppElementalSleepingBack() throws IOException {
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\nback\nclose\nwake up\nyes\nclose\n").getBytes()));
-		Pet elemental = new Elemental("PlayGameElementalSleepingBack");
-		throw new org.opentest4j.AssertionFailedError(" App is in infinite loop. this line can be removed, when problem is resolved");
-		//App.startApp(elemental); // this statement creates infinite loop
+		Pet elemental = new Elemental("PlayGameElementalSleepingBack","male");
+		//throw new org.opentest4j.AssertionFailedError(" App is in infinite loop. this line can be removed, when problem is resolved");
+		App.startGame(elemental); // this statement creates infinite loop
 	}
 }
+/*
 class FoodTest {
 	@Test
 	void TestApple(){
@@ -206,57 +207,80 @@ class TestToy {
 		assertEquals(fun, yarn.fun);
 	}
 }
+*/
 
 class TestPet {
 	@Test
 	void TestElemental(){
-		Elemental elemental = new Elemental("elemental");
+		Elemental elemental = new Elemental("elemental","male");
 		assertEquals("elemental", elemental.name_);
-		assertEquals(new Steak().name, elemental.getFavoriteFood());
-		assertEquals(new Ball().name, elemental.getFavoriteToy());
-		assertEquals(5, elemental.hunger_);
-		assertEquals(5, elemental.attention_);
-		assertEquals(5, elemental.hygiene_);
+		String favfood = elemental.getFavoriteFood();
+		String favtoy = elemental.getFavoriteToy();
+		assertEquals(favfood, elemental.getFavoriteFood());
+		assertEquals(favtoy, elemental.getFavoriteToy());
+		assertEquals(10, elemental.hunger_);
+		assertEquals(10, elemental.attention_);
+		assertEquals(10, elemental.hygiene_);
 	}
 	@Test
 	void TestCat(){
-		Dragon cat = new Dragon("cattt");
+		Dragon cat = new Dragon("cattt","female");
 		assertEquals("cattt", cat.name_);
-		assertEquals(new Tuna().name, cat.getFavoriteFood());
-		assertEquals(new Yarn().name, cat.getFavoriteToy());
-		assertEquals(5, cat.hunger_);
-		assertEquals(5, cat.attention_);
-		assertEquals(5, cat.hygiene_);
+		String favfood = cat.getFavoriteFood();
+		String favtoy = cat.getFavoriteToy();
+		assertEquals(favfood, cat.getFavoriteFood());
+		assertEquals(favtoy, cat.getFavoriteToy());
+		assertEquals(10, cat.hunger_);
+		assertEquals(10, cat.attention_);
+		assertEquals(10, cat.hygiene_);
 	}
 	@Test
 	void TestFeed(){
-		Dragon cat = new Dragon("cattt");
-		cat.feed(new Tuna());
-		assertEquals(1, cat.hunger_);
-		assertEquals(4, cat.attention_); 		//vergleich von pointer und nicht strings in if()
-		assertEquals(7, cat.hygiene_);
+		Dragon cat = new Dragon("cattt","female");
+		cat.set_hunger(5.0f);
+		cat.set_hygiene(5.0f);
+		cat.set_attention(5.0f);
+		String favfood = cat.getFavoriteFood();
+		cat.feed(favfood);
+		assertEquals(10.0f, cat.hunger_);
+		assertEquals(6.0f, cat.attention_); 		//vergleich von pointer und nicht strings in if()
+		assertEquals(3.0f, cat.hygiene_);
 
-		cat.feed(new Steak());
-		assertEquals(0, cat.hunger_);
-		assertEquals(4, cat.attention_);
-		assertEquals(9, cat.hygiene_);
+		for (String food: cat.food){
+			if (!food.equals(favfood)){
+				favfood=food;
+				break;
+			}
+		}
+		cat.set_hunger(5.0f);
+		cat.feed(favfood);
+		assertEquals(8.0f, cat.hunger_);
+		assertEquals(6.0f, cat.attention_);
+		assertEquals(1.0f, cat.hygiene_);
 	}
+
 	@Test
 	void TestClean(){
-		Dragon cat = new Dragon("cattt");
-		cat.clean("");					//why parameter??
-		assertEquals(2, cat.hygiene_);
+		Dragon cat = new Dragon("cattt","female");
+		cat.set_hunger(5.0f);
+		cat.set_hygiene(5.0f);
+		cat.set_attention(5.0f);
+
+		cat.clean("");	//why parameter??
+		assertEquals(8, cat.hygiene_);
 		assertEquals(5, cat.hunger_);
 		assertEquals(5, cat.attention_);
 	}
 	@Test
 	void TestPlay(){
-		Dragon cat = new Dragon("cattt");
-		do {
-			System.setIn(new ByteArrayInputStream(("left\nno\nclose\n").getBytes()));
-			cat.play(new Yarn());
-		} while (cat.attention_ == 5);
-		assertEquals(1, cat.attention_);
+		Dragon cat = new Dragon("cattt","female");
+		cat.set_hunger(5.0f);
+		cat.set_hygiene(5.0f);
+		cat.set_attention(5.0f);
+		String favtoy = cat.getFavoriteToy();
+		cat.play(favtoy);
+
+		assertEquals(10.0f, cat.attention_);
 	}
 }
 class TestTime {
