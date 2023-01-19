@@ -5,12 +5,12 @@ import java.util.Random;
 
 public abstract class Pet {
     protected String name_, sex_, stage_ = "Bébé";
-    protected int hunger_ = 10, hygiene_ = 10, attention_ = 10;
-    protected int health_ = hunger_ + hygiene_ + attention_;
+    protected float hunger_ = 10.0f, hygiene_ = 10.0f, attention_ = 10.0f;
+    protected float health_ = (hunger_+ hygiene_+attention_)/3;
     protected LocalDateTime birthday_, lastLogout_;
     protected Time age_;
-    public String[] toy = {"Bone", "Ball", "Tire", "Stick"};
-    public String[] food = {"Mana", "Sheep", "Human"};
+    public String[] toy = {"Bone", "Ball", "Yarn", "Stick"};
+    public String[] food = {"Apple", "Bread", "Steak"};
     public String[] cleaning = {"Bath", "Toilet","Grooming"};
 
 
@@ -18,6 +18,9 @@ public abstract class Pet {
         name_ = "None";
         sex_ = "None";
     }
+    public void set_hunger(float f){hunger_ =f;}
+    public void set_hygiene(float f){hygiene_=f;}
+    public void set_attention(float f){attention_=f;}
     private LocalDateTime stringToLocalDateTime(String str){
         return LocalDateTime.parse(str);
     }
@@ -28,7 +31,7 @@ public abstract class Pet {
         birthday_ = LocalDateTime.now();
     }
 
-    public Pet(String name, String sex, int hunger, int hygiene, int attention, String birthday, String lastLogout){
+    public Pet(String name, String sex, float hunger, float hygiene, float attention, String birthday, String lastLogout){
         name_ = name;
         sex_ = sex;
         hunger_ = hunger;
@@ -61,15 +64,15 @@ public abstract class Pet {
         return sex_;
     }
 
-    public int get_hunger(){
+    public float get_hunger(){
         return hunger_;
     }
 
-    public int get_hygiene(){
+    public float get_hygiene(){
         return hygiene_;
     }
 
-    public int get_attention(){
+    public float get_attention(){
         return attention_;
     }
 
@@ -112,7 +115,7 @@ public abstract class Pet {
         if (attention_ > 10){
             attention_ = 10;
         }
-        health_ = hunger_ + hygiene_ + attention_;
+        health_ = (hunger_ + hygiene_ + attention_)/3;
 
     }
 
@@ -125,52 +128,52 @@ public abstract class Pet {
             if (getFavoriteFood().equals(favorite)) {
                 hunger_ += 5;
                 attention_ += 1;
-                checkRange();
             } else {
                 hunger_ += 3;
-                checkRange();
             }
             hygiene_ -= 2;
-            checkRange();
         }
+        checkRange();
     }
 
-    public void clean(String cleaning){
+    public void clean(String cleaning){ //ToDo differenciate between clean possibilities
         if(hygiene_ == 10){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(name_ +" is cwean ewough. UwU");
         }
         else {
             hygiene_ += 3;
-            checkRange();
         }
-
+        checkRange();
     }
 
-    public void play(String favorite){
+    public void play(String currentToy){
 
         if (attention_ == 10){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(name_ +" doesn't want to pway with you anymowre.");}
         else {
-            if (getFavoriteToy().equals(favorite)) {
+            if (getFavoriteToy().equals(currentToy)) {
                 attention_ += 5;
-                checkRange();
             } else {
                 attention_ += 3;
-                checkRange();
             }
             hunger_ -= 2;
             hygiene_ -= 2;
-            checkRange();
         }
+        checkRange();
+
+    }
+    public boolean check_death(){
+        checkRange();
+        return health_ <= 0;
     }
 
     void getInformation(){
         System.out.println("*********************************************");
         setAge();
-        System.out.println("Name: " + name_ + "\t Secks: " + sex_ + "\t OwO: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" + "\t Stage: " + stage_);
-        System.out.println("Hunger: " + hunger_ + "\t Hygiene: " + hygiene_ + "\t Attention: " + attention_ + "\t Health: "+ health_);
+        System.out.println("Name: " + name_ + "\t Seggs: " + sex_ + "\t OwO: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" + "\t Stage: " + stage_);
+        System.out.println("Hungwy: " + hunger_ + "\t Hygiwe: " + hygiene_ + "\t Attentiwn: " + attention_ + "\t Hewwth: "+ health_);
         System.out.println("*********************************************");
     }
 
