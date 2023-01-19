@@ -158,10 +158,20 @@ public abstract class Pet {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(name_ +" doesn't want to pway with you anymowre.");}
         else {
-            if (Throw()){
-                attention_ +=3;
+            Random r = new Random();
+            int game = r.nextInt(100);
+            if (game<50){
+                if (Throw()){
+                    attention_ +=3;
+                }else {
+                    attention_ +=1;
+                }
             }else {
-                attention_ +=1;
+                if (TicTacToe()){
+                    attention_ +=3;
+                }else {
+                    attention_+=1;
+                }
             }
             if (getFavoriteToy().equals(currentToy)) {
                 attention_ += 3;
