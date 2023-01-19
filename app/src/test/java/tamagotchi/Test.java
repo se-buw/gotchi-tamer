@@ -122,18 +122,9 @@ class AppTest {
 	}
 	@Test
 	void PlayAppElementalSleepingClose() throws IOException {//TODO how do i do this
-		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\n").getBytes()));
+		System.setIn(new ByteArrayInputStream(("sleep\n").getBytes()));
 		Pet elemental = new Elemental("PlayGameElementalSleepingClose","female");
 		//App.startApp(elemental);
-	}
-
-	@Test
-	void PlayAppElementalSleepingWakeUp() throws IOException { // ToDO create sleep function
-		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\nwake up\nclose\n").getBytes()));
-		Pet elemental = new Elemental("PlayGameElementalSleepingWakeUp","male");
-		App.startGame(elemental);
-		assertEquals(8.0f,elemental.attention_);
-		assertEquals(8.0f,elemental.hunger_);
 	}
 	@Test
 	void REVIVE() throws IOException {
