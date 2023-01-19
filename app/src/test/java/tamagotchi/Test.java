@@ -121,10 +121,10 @@ class AppTest {
 		assertEquals(5.0f,cat.hygiene_);
 	}
 	@Test
-	void PlayAppElementalSleepingClose() throws IOException {//TODO how do i do this
+	void PlayAppElementalSleepingClose() throws IOException {
 		System.setIn(new ByteArrayInputStream(("sleep\n").getBytes()));
 		Pet elemental = new Elemental("PlayGameElementalSleepingClose","female");
-		//App.startApp(elemental);
+		App.startGame(elemental);
 	}
 	@Test
 	void REVIVE() throws IOException {
@@ -162,76 +162,6 @@ class AppTest {
 		App.startGame(elemental); // this statement creates infinite loop
 	}
 }
-/*
-class FoodTest {
-	@Test
-	void TestApple(){
-		String name = "apple";
-		int energy = 1;
-		Apple apple = new Apple();
-
-		assertEquals(name, apple.name);
-		assertEquals(energy, apple.energy);
-	}
-	@Test
-	void TestBread(){
-		String name = "bread";
-		int energy = 3;
-		Bread bread = new Bread();
-
-		assertEquals(name, bread.name);
-		assertEquals(energy, bread.energy);
-	}
-	@Test
-	void TestSteak(){
-		String name = "steak";
-		int energy = 4;
-		Steak steak = new Steak();
-
-		assertEquals(name, steak.name);
-		assertEquals(energy, steak.energy);
-	}
-	@Test
-	void TestTuna(){
-		String name = "tuna";
-		int energy = 4;
-		Tuna tuna = new Tuna();
-
-		assertEquals(name, tuna.name);
-		assertEquals(energy, tuna.energy);
-	}
-}
-
-class TestToy {
-	@Test
-	void TestBall(){
-		String name = "Ball";
-		int fun = 3;
-		Ball ball = new Ball();
-
-		assertEquals(name, ball.name);
-		assertEquals(fun, ball.fun);
-	}
-	@Test
-	void TestStick(){
-		String name = "Stick";
-		int fun = 1;
-		Stick stick = new Stick();
-
-		assertEquals(name, stick.name);
-		assertEquals(fun, stick.fun);
-	}
-	@Test
-	void TestYarn(){
-		String name = "Yarn";
-		int fun = 2;
-		Yarn yarn = new Yarn();
-
-		assertEquals(name, yarn.name);
-		assertEquals(fun, yarn.fun);
-	}
-}
-*/
 
 class TestPet {
 	@Test
