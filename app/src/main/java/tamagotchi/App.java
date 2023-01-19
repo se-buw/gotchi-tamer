@@ -274,37 +274,5 @@ public class App {
             }
         }while (!quit);
     }
-
-    static void write_file(Pet pet) throws IOException {
-        //change the path
-        File file = new File(pet.name_ + ".txt");
-        String filepath = file.getAbsolutePath();
-        try {
-
-            FileOutputStream fileOut = new FileOutputStream(filepath);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(pet);
-            objectOut.close();
-            //System.out.println("The Object  was successfully written to a file");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-
-        }
-    }
-    static Pet read_file(String nameOfPet) throws IOException, ClassNotFoundException {
-
-        FileInputStream fi = new FileInputStream(nameOfPet + ".txt");
-        ObjectInputStream oi = new ObjectInputStream(fi);
-
-        // Read objects
-        Pet pet = (Pet) oi.readObject();
-
-        oi.close();
-        fi.close();
-
-        return pet;
-    }
-
 }
 

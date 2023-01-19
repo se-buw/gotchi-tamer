@@ -1,7 +1,9 @@
 package tamagotchi;
+import javax.swing.plaf.TableHeaderUI;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.Scanner;
 
 public abstract class Pet {
     protected String name_, sex_, stage_ = "Bébé";
@@ -156,11 +158,16 @@ public abstract class Pet {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(name_ +" doesn't want to pway with you anymowre.");}
         else {
+            if (Throw()){
+                attention_ +=3;
+            }else {
+                attention_ +=1;
+            }
             if (getFavoriteToy().equals(currentToy)) {
-                attention_ += 5;
+                attention_ += 3;
                 System.out.println(name_+" woved to pway wif this toy. it might be its favowite uwu.");
             } else {
-                attention_ += 3;
+                attention_ += 1;
             }
             hunger_ -= 2;
             hygiene_ -= 2;
@@ -179,6 +186,112 @@ public abstract class Pet {
         System.out.println("Name: " + name_ + "\t Seggs: " + sex_ + "\t OwO: " + age_.days_ + "D " + age_.hours_ + "H "+ age_.minutes_ + "M" + "\t Stage: " + stage_);
         System.out.println("Hungwy: " + hunger_ + "\t Hygiwe: " + hygiene_ + "\t Attentiwn: " + attention_ + "\t Hewwth: "+ health_);
         System.out.println("*********************************************");
+    }
+    public boolean Throw(){
+        Random r = new Random();
+        Scanner s = new Scanner(System.in);
+        String distance;
+        int distanceInt = r.nextInt(102);
+            if (distanceInt < 34) {
+                distance = "short";
+            } else if (distanceInt < 68) {
+                distance = "medium";
+
+            } else {
+                distance = "long";
+            }
+            System.out.println("How Long do you thwow uwu?");
+            System.out.println("short \t medium \t long \t");
+            String yourDist = s.nextLine().toLowerCase();
+            if (yourDist.equals(distance)){
+                System.out.println(name_+" cawtched the toy. Nice thwow uwu.");
+                return true;
+            }
+            System.out.println(name_+" missed the toy."+ name_+" is sad. TwT");
+            return false;
+    }
+    public boolean TicTacToe(){
+        char[][] board = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+        Random r = new Random();
+        Scanner scanner = new Scanner(System.in);
+        char player = 'X';
+        System.out.println("Uwu go fwist.");
+        while (true) {
+            System.out.println("Current board:");
+            printBoard(board);
+            System.out.println("Pwease enwer a wow and cowumn(0,1,2) sepewated by space.");
+            int row = scanner.nextInt();
+            int column = scanner.nextInt();
+            if (board[row][column]!= ' '){
+                System.out.println("Invawid move. Pwease wry again. =w=");
+                continue;
+            }
+            board[row][column]=player;
+            if(checkForWin(board,player)){
+                System.out.println("Congwats uwu won. ^^");
+                return true;
+            }
+            if(checkForDraw(board)){
+                System.out.println("It's a draw. :(");
+                return false;
+            }
+            System.out.println("Now it's "+name_+"s wurn. OwO");
+            while (true) {
+                row = r.nextInt(3);
+                column = r.nextInt(3);
+                if (board[row][column]==' '){
+                    board[row][column]='O';
+                    break;
+                }
+            }
+            if(checkForWin(board,'O')){
+                System.out.println(name_+" won the game. :)");
+                return false;
+            }
+            if (checkForDraw(board)){
+                System.out.println("It's a draw. :(");
+                return false;
+            }
+        }
+    }
+
+    public static void printBoard(char[][] board) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    public static boolean checkForWin(char[][] board, char player) {
+        // check rows and columns for win
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+                return true;
+            }
+            if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
+                return true;
+            }
+        }
+        // check diagonals for win
+        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+            return true;
+        }
+        return board[0][2] == player && board[1][1] == player && board[2][0] == player;
+    }
+
+    public static boolean checkForDraw(char[][] board) {
+        // check rows, columns and diagonals for a draw
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == ' ') {
+                    return false;
+                }
+            }
+        }
+        if(!(board[0][0] == board[1][1] && board[0][0] == board[2][2]))
+            return true;
+        return !(board[0][2] == board[1][1] && board[0][2] == board[2][0]);
     }
 
 }

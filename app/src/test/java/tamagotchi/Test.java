@@ -155,7 +155,6 @@ class AppTest {
 
 	@Test
 	void PlayAppElementalSleepingBack() throws IOException {
-		//toDo sleep function
 		System.setIn(new ByteArrayInputStream(("sleep\nyes\nclose\nback\nclose\nwake up\nyes\nclose\n").getBytes()));
 		Pet elemental = new Elemental("PlayGameElementalSleepingBack","male");
 		//throw new org.opentest4j.AssertionFailedError(" App is in infinite loop. this line can be removed, when problem is resolved");
