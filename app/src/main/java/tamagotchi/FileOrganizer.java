@@ -57,6 +57,7 @@ public class FileOrganizer {
             myWriter.write(pet.getFavoriteToy() + "\n");
             myWriter.write(pet.getBirthDay() + "\n");
             myWriter.write(LocalDateTime.now() + "\n");
+            myWriter.write(pet.sleeping+"\n");
             myWriter.close();
             System.out.println("Successfully created a new pet.");
         } catch (IOException e) {

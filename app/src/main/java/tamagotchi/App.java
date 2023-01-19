@@ -78,6 +78,10 @@ public class App {
             death(pet);
             return;
         }
+        if (pet.sleeping){
+            System.out.println(pet.name_+" has woken up and came to gweet you. UwU");
+            pet.sleeping = false;
+        }
         pet.getInformation();
         displayChoices();
         Scanner sr = new Scanner(System.in);
@@ -195,7 +199,8 @@ public class App {
         Pet pet = new Elemental();
         long timePast = Duration.between(LocalDateTime.parse(attributes[9]), LocalDateTime.now()).toHours();
         float i = (float)timePast;
-        if (attributes[0].equals("elemental")&& !pet.sleeping){
+
+        if (attributes[0].equals("elemental") && attributes[10].equals("false")){
 			pet = new Elemental(attributes[0], attributes[1], attributes[2],
 					Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4])-i,
 					Float.parseFloat(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
@@ -205,8 +210,9 @@ public class App {
                     Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4]),
                     Float.parseFloat(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
             pet.sleeping = true;
+            System.out.println("sleepE");
         }
-		else if (attributes[0].equals("dragon")&& !pet.sleeping){
+		else if (attributes[0].equals("dragon")&& attributes[10].equals("false")){
 			pet = new Dragon(attributes[0], attributes[1], attributes[2],
 					Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4])-i,
 					Float.parseFloat(attributes[5])-i, attributes[6], attributes[7], attributes[8], attributes[9]);
@@ -215,6 +221,7 @@ public class App {
                     Float.parseFloat(attributes[3])-i, Float.parseFloat(attributes[4]),
                     Float.parseFloat(attributes[5]), attributes[6], attributes[7], attributes[8], attributes[9]);
             pet.sleeping = true;
+            System.out.println("sleep");
         }
         if(pet.check_death()){
             death(pet);
