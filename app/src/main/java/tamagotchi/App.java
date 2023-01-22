@@ -98,20 +98,26 @@ public class App {
                     }
                     System.out.println(" bawck");
                     input = sr.nextLine().toLowerCase();
+                    String used_food="";
                     do{
                     for (String food : pet.food) {
                         if (input.equals(food)) {
-                            pet.feed(food);
-                            back = true;
-                        } else if (input.equals("back")) {
-                            back = true;
-                        } else {
-                            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                            System.out.println("Thawt iws nowt a vawid command!");
-                            System.out.println("Pwease sewect fwom the wisted food above!");
-                            input = sr.nextLine().toLowerCase();
+                            used_food = food;
                         }
                     }
+                    if (input.equals(used_food)){
+                        pet.feed(input);
+                        back=true;
+                    }
+                    else if (input.equals("back")) {
+                        back = true;
+                    } else {
+                        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        System.out.println("Thawt iws nowt a vawid command!");
+                        System.out.println("Pwease sewect fwom the wisted food above!");
+                        input = sr.nextLine().toLowerCase();
+                    }
+
                     pet.getInformation();
                     displayChoices();
                     } while (!back);
@@ -123,10 +129,15 @@ public class App {
                     }
                     System.out.println(" bawck");
                     input = sr.nextLine().toLowerCase();
+                    String used_cleaning = "";
                     do {
-                    for (String cleaning : pet.cleaning){
+                    for (String cleaning : pet.cleaning) {
                         if (input.equals(cleaning)){
-                            pet.clean(cleaning);
+                            used_cleaning =cleaning;
+                        }
+                    }
+                        if (input.equals(used_cleaning)){
+                            pet.clean(input);
                             back = true;
                             pet.getInformation();
                             displayChoices();
@@ -140,7 +151,6 @@ public class App {
                             System.out.println("Pwease sewect fwom the wisted cwean activities above!");
                             input = sr.nextLine().toLowerCase();
                         }
-                    }
                     } while (!back);
                 }
                 case "play" -> {
@@ -150,10 +160,14 @@ public class App {
                     }
                     System.out.println(" bawck");
                     input = sr.nextLine().toLowerCase();
+                    String used_toy = "";
                     do{
                     for (String toy: pet.toy) {
-                        if (input.equals(toy)) {
-                            pet.play(toy);
+                        if (input.equals(toy)){
+                            used_toy = toy;
+                    }
+                        if (input.equals(used_toy)) {
+                            pet.play(input);
                             back = true;
                             pet.getInformation();
                             displayChoices();
@@ -248,7 +262,7 @@ public class App {
                     Pet pet = loadGame(petName);
                     if (pet.get_name().equals("")) {
                         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        System.out.println("Something went wong!OwO pwease twy again =w=");
+                        System.out.println("Somewhing went wong!OwO pwease twy again =w=");
                     } else {
                         startGame(pet);
                         quit = true;

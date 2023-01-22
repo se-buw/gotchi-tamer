@@ -16,13 +16,13 @@ public class FileOrganizer {
             //File myObj = new File("C:\\Users\\danie\\Desktop\\tamagotchi.txt");
 
             if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+                System.out.println("Fiwe cweated:" + myObj.getName());
             } else {
-                System.out.println("File already existed.");
+                System.out.println("Fiwe awweady existed.");
             }
         } catch (
                 IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An ewwow occuwwed.");
             //e.printStackTrace();
         }
     }
@@ -38,7 +38,7 @@ public class FileOrganizer {
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An ewwow occuwwed.");
             e.printStackTrace();
         }
     }
@@ -59,9 +59,9 @@ public class FileOrganizer {
             myWriter.write(LocalDateTime.now() + "\n");
             myWriter.write(pet.sleeping+"\n");
             myWriter.close();
-            System.out.println("Successfully created a new pet.");
+            System.out.println("Successfuwwy cweated a new pet. ^^");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An ewwow occuwwed.");
             //e.printStackTrace();
         }
     }
