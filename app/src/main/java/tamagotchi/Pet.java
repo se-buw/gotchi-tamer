@@ -129,6 +129,7 @@ public abstract class Pet {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             System.out.println(name_ +" is not hungwy. TT ");}
         else {
+            System.out.println(getFavoriteFood());
             if (getFavoriteFood().equals(favorite)) {
                 hunger_ += 5;
                 attention_ += 1;
